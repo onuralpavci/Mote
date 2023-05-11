@@ -1,0 +1,290 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.NoteApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_light</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_light</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="materialButtonStyle">@style/Button.Primary</item>
+
+        <!-- Customize your theme here. -->
+    </style>
+
+    <!-- TextAppearance -->
+    <style name="TextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextAppearance.XS">
+        <item name="android:textSize">@dimen/text_size_10</item>
+    </style>
+
+    <style name="TextAppearance.2XS">
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="TextAppearance.SM">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="TextAppearance.Base">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="TextAppearance.LG">
+        <item name="android:textSize">@dimen/text_size_20</item>
+    </style>
+
+    <style name="TextAppearance.XL">
+        <item name="android:textSize">@dimen/text_size_24</item>
+    </style>
+
+    <style name="TextAppearance.2XL">
+        <item name="android:textSize">@dimen/text_size_32</item>
+    </style>
+
+    <style name="TextAppearance.3XL">
+        <item name="android:textSize">@dimen/text_size_40</item>
+    </style>
+
+    <style name="TextAppearance.XS.Inter">
+        <item name="android:textSize">@dimen/text_size_10</item>
+        <item name="fontFamily">@font/inter_regular</item>
+    </style>
+
+    <style name="TextAppearance.2XS.Inter">
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="fontFamily">@font/inter_regular</item>
+    </style>
+
+    <style name="TextAppearance.SM.Inter">
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="fontFamily">@font/inter_regular</item>
+    </style>
+
+    <style name="TextAppearance.Base.Inter">
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="fontFamily">@font/inter_regular</item>
+    </style>
+
+    <style name="TextAppearance.LG.Inter">
+        <item name="android:textSize">@dimen/text_size_20</item>
+        <item name="fontFamily">@font/inter_regular</item>
+    </style>
+
+    <style name="TextAppearance.XL.Inter">
+        <item name="android:textSize">@dimen/text_size_24</item>
+        <item name="fontFamily">@font/inter_regular</item>
+    </style>
+
+    <style name="TextAppearance.2XL.Inter">
+        <item name="android:textSize">@dimen/text_size_32</item>
+        <item name="fontFamily">@font/inter_regular</item>
+    </style>
+
+    <style name="TextAppearance.3XL.Inter">
+        <item name="android:textSize">@dimen/text_size_40</item>
+        <item name="fontFamily">@font/inter_regular</item>
+    </style>
+
+    <style name="TextAppearance.XS.Inter.Medium">
+        <item name="android:textSize">@dimen/text_size_10</item>
+        <item name="fontFamily">@font/inter_medium</item>
+    </style>
+
+    <style name="TextAppearance.2XS.Inter.Medium">
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="fontFamily">@font/inter_medium</item>
+    </style>
+
+    <style name="TextAppearance.SM.Inter.Medium">
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="fontFamily">@font/inter_medium</item>
+    </style>
+
+    <style name="TextAppearance.Base.Inter.Medium">
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="fontFamily">@font/inter_medium</item>
+    </style>
+
+    <style name="TextAppearance.LG.Inter.Medium">
+        <item name="android:textSize">@dimen/text_size_20</item>
+        <item name="fontFamily">@font/inter_medium</item>
+    </style>
+
+    <style name="TextAppearance.XL.Inter.Medium">
+        <item name="android:textSize">@dimen/text_size_24</item>
+        <item name="fontFamily">@font/inter_medium</item>
+    </style>
+
+    <style name="TextAppearance.2XL.Inter.Medium">
+        <item name="android:textSize">@dimen/text_size_32</item>
+        <item name="fontFamily">@font/inter_medium</item>
+    </style>
+
+    <style name="TextAppearance.3XL.Inter.Medium">
+        <item name="android:textSize">@dimen/text_size_40</item>
+        <item name="fontFamily">@font/inter_medium</item>
+    </style>
+
+    <style name="TextAppearance.XS.Inter.Bold">
+        <item name="android:textSize">@dimen/text_size_10</item>
+        <item name="fontFamily">@font/inter_bold</item>
+    </style>
+
+    <style name="TextAppearance.2XS.Inter.Bold">
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="fontFamily">@font/inter_bold</item>
+    </style>
+
+    <style name="TextAppearance.SM.Inter.Bold">
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="fontFamily">@font/inter_bold</item>
+    </style>
+
+    <style name="TextAppearance.Base.Inter.Bold">
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="fontFamily">@font/inter_bold</item>
+    </style>
+
+    <style name="TextAppearance.LG.Inter.Bold">
+        <item name="android:textSize">@dimen/text_size_20</item>
+        <item name="fontFamily">@font/inter_bold</item>
+    </style>
+
+    <style name="TextAppearance.XL.Inter.Bold">
+        <item name="android:textSize">@dimen/text_size_24</item>
+        <item name="fontFamily">@font/inter_bold</item>
+    </style>
+
+    <style name="TextAppearance.2XL.Inter.Bold">
+        <item name="android:textSize">@dimen/text_size_32</item>
+        <item name="fontFamily">@font/inter_bold</item>
+    </style>
+
+    <style name="TextAppearance.3XL.Inter.Bold">
+        <item name="android:textSize">@dimen/text_size_40</item>
+        <item name="fontFamily">@font/inter_bold</item>
+    </style>
+    <!-- End of TextAppearance -->
+
+    <!-- Button -->
+    <style name="Button" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:letterSpacing">0</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">@dimen/button_min_height</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:textAppearance">@style/TextAppearance.Base.Inter.Medium</item>
+        <item name="iconPadding">@dimen/spacing_xsmall</item>
+    </style>
+
+    <style name="Button.Primary">
+        <item name="backgroundTint">@color/primary_button_background_color</item>
+        <item name="android:textColor">@color/primary_button_text_color</item>
+        <item name="rippleColor">@color/primary_button_ripple_color</item>
+    </style>
+
+    <style name="Button.Secondary">
+        <item name="backgroundTint">@color/secondary_button_background_color</item>
+        <item name="android:textColor">@color/secondary_button_text_color</item>
+        <item name="rippleColor">@color/secondary_button_ripple_color</item>
+        <item name="iconTint">@color/secondary_button_text_color</item>
+        <item name="strokeColor">@color/secondary_button_text_color</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="Button.Transparent">
+        <item name="backgroundTint">@color/transparent</item>
+        <item name="rippleColor">@null</item>
+        <item name="iconTint">@color/primary_link_color</item>
+        <item name="android:textColor">@color/primary_link_color</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="iconPadding">@dimen/spacing_xsmall</item>
+    </style>
+
+    <style name="Button.Primary.Icon">
+        <item name="cornerRadius">0dp</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconTint">@color/white</item>
+        <item name="iconGravity">textStart</item>
+    </style>
+
+    <style name="Button.Secondary.Icon">
+        <item name="cornerRadius">0dp</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconTint">@color/black</item>
+        <item name="strokeColor">@color/transparent</item>
+    </style>
+
+    <style name="FloatingActionButton">
+        <item name="fabCustomSize">64dp</item>
+    </style>
+
+    <style name="FloatingActionButton.Primary">
+        <item name="android:backgroundTint">@color/primary</item>
+        <item name="backgroundTint">@color/primary</item>
+        <item name="fabCustomSize">64dp</item>
+        <item name="tint">@color/white</item>
+    </style>
+
+    <style name="FloatingActionButton.Secondary">
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="fabCustomSize">64dp</item>
+        <item name="tint">@color/primary</item>
+    </style>
+
+    <!-- Text Input -->
+    <style name="TextInputLayout" />
+
+    <style name="TextInputLayout.Title">
+        <item name="boxBackgroundMode">none</item>
+        <item name="hintEnabled">false</item>
+    </style>
+
+    <style name="TextInputLayout.TextArea">
+        <item name="boxBackgroundMode">none</item>
+        <item name="hintEnabled">false</item>
+    </style>
+
+    <style name="TextInputEditText" parent="Widget.AppCompat.EditText" />
+
+    <style name="TextInputEditText.Title" parent="Widget.AppCompat.EditText">
+        <item name="android:textColorHint">@color/base_grey</item>
+        <item name="hintTextColor">@color/base_grey</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAppearance">@style/TextAppearance.2XL.Inter.Bold</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+    </style>
+
+    <style name="TextInputEditText.TextArea" parent="ThemeOverlay.Material3.TextInputEditText">
+        <item name="android:textColorHint">@color/base_grey</item>
+        <item name="hintTextColor">@color/base_grey</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:textAppearance">@style/TextAppearance.Base.Inter</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+    </style>
+
+    <!-- Divider -->
+    <style name="HorizontalDivider">
+        <item name="android:background">@color/light_grey</item>
+    </style>
+
+</resources>

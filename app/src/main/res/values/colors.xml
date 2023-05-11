@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="primary">#6A3EA1</color>
+    <color name="primary_dark">#3A2258</color>
+    <color name="primary_light">#EFE9F7</color>
+    <color name="primary_background">#FAF8FC</color>
+
+    <color name="secondary">#DEDC52</color>
+    <color name="secondary_dark">#565510</color>
+    <color name="secondary_light">#F7F6D4</color>
+
+    <color name="black">#180E25</color>
+    <color name="black_60_alpha">#99180E25</color>
+    <color name="dark_grey">#827D89</color>
+    <color name="base_grey">#C8C5CB</color>
+    <color name="light_grey">#EFEEF0</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="success">#60D889</color>
+    <color name="success_dark">#1F7F40</color>
+    <color name="success_light">#DAF6E4</color>
+
+    <color name="error">#CE3A54</color>
+    <color name="error_dark">#5A1623</color>
+    <color name="error_light">#F7DEE3</color>
+
+    <color name="warning">#F8C715</color>
+    <color name="warning_dark">#725A03</color>
+    <color name="warning_light">#FDEBAB</color>
+
+    <color name="primary_text_color">@color/black</color>
+    <color name="primary_link_color">@color/primary</color>
+
+    <color name="primary_button_text_color">@color/white</color>
+    <color name="primary_button_background_color">@color/primary</color>
+    <color name="primary_button_ripple_color">@color/primary_dark</color>
+
+    <color name="secondary_button_text_color">@color/primary</color>
+    <color name="secondary_button_background_color">@color/white</color>
+    <color name="secondary_button_ripple_color">@color/white</color>
+
+    <color name="tab_bar_background">@color/white</color>
+    <color name="tab_bar_icon_active">@color/primary</color>
+    <color name="tab_bar_icon_non_active">@color/dark_grey</color>
+
+
+</resources>

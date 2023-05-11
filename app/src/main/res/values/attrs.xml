@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomTitleInputLayout">
+        <attr name="titleHint" format="string" />
+        <attr name="titleText" format="string" />
+        <attr name="titleSingleLine" format="boolean" />
+        <attr name="titleMaxCharacter" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomTextAreaInputLayout">
+        <attr name="textAreaHint" format="string" />
+        <attr name="textAreaText" format="string" />
+        <attr name="textAreaSingleLine" format="boolean" />
+        <attr name="textAreaMaxCharacter" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomSearchBarInputLayout">
+        <attr name="searchBarHint" format="string" />
+        <attr name="searchBarText" format="string" />
+        <attr name="searchBarSingleLine" format="boolean" />
+        <attr name="searchBarMaxCharacter" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomSettingsListItem">
+        <attr name="settingIcon" format="reference" />
+        <attr name="settingTitle" format="string" />
+        <attr name="settingEndText" format="string" />
+    </declare-styleable>
+</resources>

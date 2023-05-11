@@ -1,0 +1,104 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id "androidx.navigation.safeargs.kotlin"
+    id "kotlin-kapt"
+    id "dagger.hilt.android.plugin"
+    id "kotlin-parcelize"
+}
+
+android {
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.task.noteapp"
+        minSdkVersion 24
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        // Adds exported schema location as test app assets.
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:${libVersions.coreKtx}"
+    implementation "androidx.appcompat:appcompat:${libVersions.appCompat}"
+    implementation "com.google.android.material:material:${libVersions.material}"
+    implementation "androidx.constraintlayout:constraintlayout:${libVersions.constraintLayout}"
+    testImplementation "junit:junit:${testLibVersions.junit}"
+    androidTestImplementation "androidx.test.ext:junit:${testLibVersions.androidxjunit}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${testLibVersions.espresso}"
+    implementation "androidx.room:room-testing:${testLibVersions.roomTesting}"
+
+    // Fragment
+    implementation "androidx.fragment:fragment-ktx:${libVersions.fragment}"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:${libVersions.navigation}"
+    implementation "androidx.navigation:navigation-ui-ktx:${libVersions.navigation}"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libVersions.coroutines}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${libVersions.coroutines}"
+
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:${libVersions.lifecycleExt}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${libVersions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-common-java8:${libVersions.lifecycle}"
+
+    // Biometric
+    implementation "androidx.biometric:biometric:${libVersions.biometric}"
+
+    // Room
+    implementation "androidx.room:room-runtime:${libVersions.room}"
+    implementation "androidx.room:room-ktx:${libVersions.room}"
+    kapt "androidx.room:room-compiler:${libVersions.room}"
+
+    // Encryption
+    implementation "com.google.crypto.tink:tink-android:${libVersions.tink}"
+
+    // DI
+    implementation "com.google.dagger:hilt-android:$dagger_gradle_version"
+    kapt "com.google.dagger:hilt-android-compiler:$dagger_gradle_version"
+    kapt "androidx.hilt:hilt-compiler:${libVersions.hiltCompiler}"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:${libVersions.glide}"
+    kapt "com.github.bumptech.glide:compiler:${libVersions.glide}"
+
+    // Browser
+    implementation "androidx.browser:browser:${libVersions.browser}"
+}

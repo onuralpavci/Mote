@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/spacing_normal"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <ImageView
+        android:id="@+id/selectedImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_image_input_not_selected"
+        app:layout_constraintDimensionRatio="4:3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/editButton"
+        style="@style/FloatingActionButton.Secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        app:fabCustomSize="56dp"
+        app:layout_constraintBottom_toBottomOf="@id/selectedImageView"
+        app:layout_constraintEnd_toEndOf="@id/selectedImageView"
+        app:srcCompat="@drawable/ic_pencil" />
+
+    <ImageView
+        android:id="@+id/placeholderView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="@id/selectedImageView"
+        app:layout_constraintEnd_toEndOf="@id/selectedImageView"
+        app:layout_constraintStart_toStartOf="@id/selectedImageView"
+        app:layout_constraintTop_toTopOf="@id/selectedImageView"
+        app:srcCompat="@drawable/ic_image" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/deleteButton"
+        style="@style/Button.Transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xsmall"
+        android:layout_marginEnd="@dimen/spacing_xsmall"
+        android:drawablePadding="0dp"
+        app:icon="@drawable/ic_close"
+        app:layout_constraintEnd_toEndOf="@id/selectedImageView"
+        app:layout_constraintTop_toTopOf="@id/selectedImageView" />
+
+</merge>

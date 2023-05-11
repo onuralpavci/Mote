@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/spacing_normal"
+        android:paddingTop="@dimen/spacing_normal"
+        android:paddingBottom="@dimen/spacing_xxxxlarge"
+        tools:context=".MainActivity">
+
+        <com.task.noteapp.modules.customview.customscreenstate.ui.CustomScreenState
+            android:id="@+id/screenState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <com.task.noteapp.modules.customview.customsettingslistitem.ui.CustomSettingsListItem
+            android:id="@+id/githubSettingItem"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/settings_list_item_min_height"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            app:settingEndText="@string/onuralp_avci"
+            app:settingIcon="@drawable/ic_github"
+            app:settingTitle="@string/github" />
+
+        <com.task.noteapp.modules.customview.customsettingslistitem.ui.CustomSettingsListItem
+            android:id="@+id/linkedInSettingItem"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/settings_list_item_min_height"
+            android:gravity="center"
+            app:settingEndText="@string/onuralp_avci"
+            app:settingIcon="@drawable/ic_linkedin"
+            app:settingTitle="@string/linked_in" />
+
+    </LinearLayout>
+
+
+</ScrollView>

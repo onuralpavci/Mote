@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@id/notesFragment"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home" />
+
+    <item
+        android:id="@id/savedNotesFragment"
+        android:icon="@drawable/ic_bookmark_thin"
+        android:title="@string/saved" />
+
+    <item
+        android:id="@+id/addNoteMenuButton"
+        android:enabled="false"
+        android:title="" />
+
+    <item
+        android:id="@id/searchNotesFragment"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search" />
+
+    <item
+        android:id="@id/settingsFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
+</menu>

@@ -1,0 +1,39 @@
+ext {
+    targets = [
+            compileSdkVersion: 33,
+            minSdkVersion    : 24,
+            targetSdkVersion : 33
+    ]
+
+    application = [
+            applicationId: 'com.task.noteapp'
+    ]
+
+    libVersions = [
+            coroutines      : '1.6.4',
+            material        : '1.6.1',
+            appCompat       : '1.4.2',
+            legacySupport   : '1.0.0',
+            lifecycle       : '2.5.1',
+            lifecycleExt    : '2.2.0',
+            constraintLayout: '2.1.4',
+            fragment        : '1.5.2',
+            coreKtx         : '1.8.0',
+            navigation      : '2.5.3',
+            hiltCompiler    : '1.0.0',
+            biometric       : '1.1.0',
+            room            : '2.5.1',
+            glide           : '4.13.2',
+            tink            : '1.7.0',
+            exoPlayer       : '2.18.1',
+            browser         : '1.4.0'
+    ]
+
+    testLibVersions = [
+            junit   : '4.13.2',
+            runner  : '1.4.0',
+            roomTesting  : '2.5.1',
+            espresso: '3.4.0',
+            androidxjunit: '1.1.5'
+    ]
+}

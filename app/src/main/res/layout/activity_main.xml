@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_background"
+    tools:context=".MainActivity">
+
+    <com.task.noteapp.modules.customview.custoomtoolbar.ui.CustomToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/default_toolbar_height"
+        android:elevation="1dp"
+        android:paddingHorizontal="@dimen/spacing_normal"
+        android:paddingVertical="@dimen/spacing_xsmall"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navigationHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/main_bottom_navigation_height"
+        android:padding="@dimen/spacing_normal"
+        app:backgroundTint="@color/tab_bar_background"
+        app:elevation="@dimen/main_bottom_navigation_elevation"
+        app:itemIconSize="@dimen/main_bottom_navigation_icon_size"
+        app:itemIconTint="@color/navigation_item_color"
+        app:itemPaddingBottom="1dp"
+        app:itemPaddingTop="1dp"
+        app:itemRippleColor="@null"
+        app:itemTextAppearanceActive="@style/TextAppearance.XS.Inter"
+        app:itemTextAppearanceInactive="@style/TextAppearance.XS.Inter"
+        app:itemTextColor="@color/navigation_item_color"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/addNoteButtonBackgroundView"
+        android:layout_width="@dimen/main_bottom_navigation_background_size"
+        android:layout_height="@dimen/main_bottom_navigation_background_size"
+        android:background="@drawable/bg_bottom_navigation_add_button"
+        android:elevation="0.01dp"
+        app:layout_constraintBottom_toBottomOf="@id/addNoteButton"
+        app:layout_constraintEnd_toEndOf="@id/addNoteButton"
+        app:layout_constraintStart_toStartOf="@id/addNoteButton"
+        app:layout_constraintTop_toTopOf="@id/addNoteButton" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addNoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/FloatingActionButton.Primary"
+        android:layout_marginBottom="@dimen/main_bottom_navigation_add_margin"
+        app:elevation="0.02dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_plus" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/bottomNavigationViewGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="bottomNavigationView, addNoteButton, addNoteButtonBackgroundView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

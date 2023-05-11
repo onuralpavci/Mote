@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeNavigation"
+    app:startDestination="@id/notesFragment">
+
+    <action
+        android:id="@+id/action_global_createNoteFragment"
+        app:destination="@id/createNoteFragment" />
+
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="com.task.noteapp.modules.notes.ui.NotesFragment"
+        android:label="NotesFragment"
+        tools:layout="@layout/fragment_notes">
+        <action
+            android:id="@+id/action_notesFragment_to_createNoteFragment"
+            app:destination="@id/createNoteFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createNoteFragment"
+        android:name="com.task.noteapp.modules.createnote.ui.CreateNoteFragment"
+        android:label="CreateNoteFragment"
+        tools:layout="@layout/fragment_create_note">
+        <argument
+            android:name="noteId"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/savedNotesFragment"
+        android:name="com.task.noteapp.modules.savednotes.ui.SavedNotesFragment"
+        android:label="SavedNotesFragment"
+        tools:layout="@layout/fragment_saved_notes" />
+
+    <fragment
+        android:id="@+id/searchNotesFragment"
+        android:name="com.task.noteapp.modules.searchnotes.ui.SearchNotesFragment"
+        android:label="SearchNotesFragment"
+        tools:layout="@layout/fragment_search_notes">
+        <action
+            android:id="@+id/action_searchNotesFragment_to_createNoteFragment"
+            app:destination="@id/createNoteFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.task.noteapp.modules.settings.ui.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+
+</navigation>
