@@ -12,7 +12,7 @@
 
     <fragment
         android:id="@+id/notesFragment"
-        android:name="com.task.noteapp.modules.notes.ui.NotesFragment"
+        android:name="com.avci.mote.modules.notes.ui.NotesFragment"
         android:label="NotesFragment"
         tools:layout="@layout/fragment_notes">
         <action
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/createNoteFragment"
-        android:name="com.task.noteapp.modules.createnote.ui.CreateNoteFragment"
+        android:name="com.avci.mote.modules.createnote.ui.CreateNoteFragment"
         android:label="CreateNoteFragment"
         tools:layout="@layout/fragment_create_note">
         <argument
@@ -32,13 +32,13 @@
 
     <fragment
         android:id="@+id/savedNotesFragment"
-        android:name="com.task.noteapp.modules.savednotes.ui.SavedNotesFragment"
+        android:name="com.avci.mote.modules.savednotes.ui.SavedNotesFragment"
         android:label="SavedNotesFragment"
         tools:layout="@layout/fragment_saved_notes" />
 
     <fragment
         android:id="@+id/searchNotesFragment"
-        android:name="com.task.noteapp.modules.searchnotes.ui.SearchNotesFragment"
+        android:name="com.avci.mote.modules.searchnotes.ui.SearchNotesFragment"
         android:label="SearchNotesFragment"
         tools:layout="@layout/fragment_search_notes">
         <action
@@ -48,7 +48,7 @@
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.task.noteapp.modules.settings.ui.SettingsFragment"
+        android:name="com.avci.mote.modules.settings.ui.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings" />
 

@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.task.noteapp.modules.customview.customsearchbar.ui.CustomSearchBarInputLayout
+    <com.avci.mote.modules.customview.customsearchbar.ui.CustomSearchBarInputLayout
         android:id="@+id/searchBarCustomLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"

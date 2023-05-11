@@ -7,7 +7,7 @@
     android:background="@color/primary_background"
     tools:context=".MainActivity">
 
-    <com.task.noteapp.modules.customview.custoomtoolbar.ui.CustomToolbar
+    <com.avci.mote.modules.customview.custoomtoolbar.ui.CustomToolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="@dimen/default_toolbar_height"

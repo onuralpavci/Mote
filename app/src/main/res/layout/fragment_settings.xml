@@ -15,14 +15,14 @@
         android:paddingBottom="@dimen/spacing_xxxxlarge"
         tools:context=".MainActivity">
 
-        <com.task.noteapp.modules.customview.customscreenstate.ui.CustomScreenState
+        <com.avci.mote.modules.customview.customscreenstate.ui.CustomScreenState
             android:id="@+id/screenState"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
             tools:visibility="visible" />
 
-        <com.task.noteapp.modules.customview.customsettingslistitem.ui.CustomSettingsListItem
+        <com.avci.mote.modules.customview.customsettingslistitem.ui.CustomSettingsListItem
             android:id="@+id/githubSettingItem"
             android:layout_width="match_parent"
             android:layout_height="@dimen/settings_list_item_min_height"
@@ -32,7 +32,7 @@
             app:settingIcon="@drawable/ic_github"
             app:settingTitle="@string/github" />
 
-        <com.task.noteapp.modules.customview.customsettingslistitem.ui.CustomSettingsListItem
+        <com.avci.mote.modules.customview.customsettingslistitem.ui.CustomSettingsListItem
             android:id="@+id/linkedInSettingItem"
             android:layout_width="match_parent"
             android:layout_height="@dimen/settings_list_item_min_height"

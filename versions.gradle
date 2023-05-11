@@ -5,10 +5,6 @@ ext {
             targetSdkVersion : 33
     ]
 
-    application = [
-            applicationId: 'com.task.noteapp'
-    ]
-
     libVersions = [
             coroutines      : '1.6.4',
             material        : '1.6.1',

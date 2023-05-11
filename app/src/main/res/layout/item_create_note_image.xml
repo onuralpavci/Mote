@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.task.noteapp.modules.customview.customimageinput.ui.CustomImageInput xmlns:android="http://schemas.android.com/apk/res/android"
+<com.avci.mote.modules.customview.customimageinput.ui.CustomImageInput xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/customImageLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

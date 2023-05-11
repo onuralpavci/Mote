@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.task.noteapp.modules.customview.customscreenstate.ui.CustomScreenState
+    <com.avci.mote.modules.customview.customscreenstate.ui.CustomScreenState
         android:id="@+id/screenState"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

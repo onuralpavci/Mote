@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.task.noteapp.modules.customview.customtaskbar.CustomTaskbar
+    <com.avci.mote.modules.customview.customtaskbar.CustomTaskbar
         android:id="@+id/taskbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
