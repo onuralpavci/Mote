@@ -26,8 +26,4 @@ class SearchNotesAdapter(private val listener: SearchNotesAdapterListener) :
     fun interface SearchNotesAdapterListener {
         fun onNoteClicked(noteId: Int)
     }
-
-    companion object {
-        private val logTag = SearchNotesAdapter::class.java.simpleName
-    }
 }

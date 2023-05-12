@@ -1,18 +1,12 @@
 package com.avci.mote.utils
 
 import android.view.View
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.annotation.StyleRes
-import androidx.core.view.get
 import androidx.core.view.isVisible
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.textview.MaterialTextView
 
 fun View.show() {
     this.visibility = View.VISIBLE

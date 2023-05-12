@@ -3,7 +3,6 @@ package com.avci.mote.utils
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.IdRes
-import androidx.annotation.NonNull
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
@@ -11,11 +10,9 @@ import com.avci.mote.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 fun BottomNavigationView.setupWithNavController(
-    navController: NavController,
-    onMenuItemClicked: (item: MenuItem) -> Unit
+    navController: NavController
 ) {
     setOnItemSelectedListener { item ->
-        onMenuItemClicked(item)
         return@setOnItemSelectedListener onNavDestinationChanged(item, navController)
     }
 }
@@ -30,7 +27,7 @@ private fun onNavDestinationChanged(
     return true
 }
 
-fun NavController.navigateSafe(@NonNull directions: NavDirections, onError: (() -> Unit)? = null) {
+fun NavController.navigateSafe(directions: NavDirections, onError: (() -> Unit)? = null) {
     try {
         navigate(directions)
     } catch (exception: IllegalArgumentException) {

@@ -53,7 +53,7 @@ class SavedNotesFragment : BaseFragment(R.layout.fragment_saved_notes) {
             val columnSpacingInPixels = resources.getDimensionPixelSize(R.dimen.spacing_small)
             addItemDecoration(SpacesItemDecoration(columnSpacingInPixels))
             adapter = searchNotesAdapter
-            layoutManager = GridLayoutManager(context, NotesFragment.NOTES_COLUMN_COUNT)
+            layoutManager = GridLayoutManager(context, SAVED_NOTES_COLUMN_COUNT)
         }
     }
 
@@ -75,6 +75,6 @@ class SavedNotesFragment : BaseFragment(R.layout.fragment_saved_notes) {
     }
 
     companion object {
-        const val NOTES_COLUMN_COUNT = 2
+        const val SAVED_NOTES_COLUMN_COUNT = 2
     }
 }

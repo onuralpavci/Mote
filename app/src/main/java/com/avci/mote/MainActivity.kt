@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         binding.addNoteButton.setOnClickListener {
             nav(HomeNavigationDirections.actionGlobalCreateNoteFragment(NEW_NOTE_ID))
         }
-        binding.bottomNavigationView.setupWithNavController(navController, {})
+        binding.bottomNavigationView.setupWithNavController(navController)
     }
 
     private fun startNavigation() {

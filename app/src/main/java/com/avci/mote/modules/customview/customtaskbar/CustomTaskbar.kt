@@ -16,10 +16,6 @@ class CustomTaskbar @JvmOverloads constructor(
 
     private val binding = viewBinding(CustomTaskbarBinding::inflate)
 
-    fun setContent(content: String) {
-        binding.contentTextView.text = content
-    }
-
     fun setContent(noteDate: BaseNoteDate) {
         val formattedDateTime = context.getFormattedTime(noteDate)
         binding.contentTextView.text = formattedDateTime
