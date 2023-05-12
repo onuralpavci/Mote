@@ -64,4 +64,9 @@
     <string name="saved_exclamation">Saved!</string>
     <string name="your_note_is">Your note is marked as saved,\nand already moved to the\n "Saved Notes" menu.</string>
     <string name="close">Close</string>
+
+    <string name="enter_image_url">Enter Image URL</string>
+    <string name="done">Done</string>
+    <string name="image_url">Image URL</string>
+    <string name="save_url_requires">Save URL requires internet. Placeholder shown when offline.</string>
 </resources>

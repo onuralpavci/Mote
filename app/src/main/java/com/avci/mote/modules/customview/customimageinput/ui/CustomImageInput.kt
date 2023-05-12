@@ -4,27 +4,66 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.AttributeSet
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.motion.widget.MotionLayout
 import com.avci.mote.R
 import com.avci.mote.databinding.CustomImageInputBinding
 import com.avci.mote.utils.hide
 import com.avci.mote.utils.loadImageWithCachedFirst
+import com.avci.mote.utils.setImageResAndVisibility
 import com.avci.mote.utils.show
 import com.avci.mote.utils.viewbinding.viewBinding
+import kotlin.properties.Delegates
 
 class CustomImageInput @JvmOverloads constructor(
     context: Context,
     private val attrs: AttributeSet? = null
-) : ConstraintLayout(context, attrs) {
+) : MotionLayout(context, attrs) {
+
+    private var isEditOptionsOpen by Delegates.observable(false) { _, _, newValue ->
+        if (newValue) {
+            binding.editButton.setImageResAndVisibility(R.drawable.ic_close)
+            transitionToEnd()
+        } else {
+            binding.editButton.setImageResAndVisibility(R.drawable.ic_pencil)
+            transitionToStart()
+        }
+    }
 
     private val binding = viewBinding(CustomImageInputBinding::inflate)
 
-    fun setOnEditButtonClickListener(callback: (() -> Unit)) {
-        binding.editButton.setOnClickListener { callback.invoke() }
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        initUi()
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        loadLayoutDescription(R.xml.custom_image_input_scene)
+        isEditOptionsOpen = false
+    }
+
+    private fun initUi() {
+        binding.editButton.setOnClickListener {
+            isEditOptionsOpen = isEditOptionsOpen.not()
+        }
+    }
+
+    fun setOnSelectImageButtonClickListener(callback: (() -> Unit)) {
+        binding.selectImageButton.setOnClickListener {
+            callback.invoke()
+        }
+    }
+
+    fun setOnDownloadImageButtonClickListener(callback: (() -> Unit)) {
+        binding.downloadImageButton.setOnClickListener {
+            callback.invoke()
+        }
     }
 
     fun setOnCloseClickListener(callback: (() -> Unit)) {
-        binding.deleteButton.setOnClickListener { callback.invoke() }
+        binding.deleteButton.setOnClickListener {
+            callback.invoke()
+        }
     }
 
     fun loadImage(uri: Uri, onLoadFailed: (() -> Unit)? = null) {

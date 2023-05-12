@@ -2,6 +2,7 @@ package com.avci.mote.modules.createnote.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -15,6 +16,7 @@ import com.avci.mote.modules.createnote.ui.adapter.CreateNoteAdapter
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem
 import com.avci.mote.modules.createnote.ui.model.CreateNotePreview
 import com.avci.mote.modules.customview.customactiondialog.ui.providers.showDeleteNoteActionDialog
+import com.avci.mote.modules.customview.customactiondialog.ui.providers.showEnterUrlActionDialog
 import com.avci.mote.modules.customview.customactiondialog.ui.providers.showNoteSavedActionDialog
 import com.avci.mote.utils.openChatGPT
 import com.avci.mote.utils.viewbinding.viewBinding
@@ -58,6 +60,12 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
             // TODO: Find a better way to get update image component id
             createNoteViewModel.imageComponentIdToUpdate = componentId
             openImagePicker()
+        }
+
+        override fun onDownloadEditButtonClicked(componentId: Int) {
+            // TODO: Find a better way to get update image component id
+            createNoteViewModel.imageComponentIdToUpdate = componentId
+            openEnterImageUrlDialog()
         }
 
         override fun onImageLoadImageFailed(componentId: Int) {
@@ -118,9 +126,17 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
         startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE)
     }
 
-    private fun deleteNote() {
+    private fun openEnterImageUrlDialog() {
+        context?.showEnterUrlActionDialog(onDoneClickListener = ::onImageUrlEntered)
+    }
+
+    private fun deleteNote(data: String?) {
         createNoteViewModel.deleteNote()
         navBack()
+    }
+
+    private fun onImageUrlEntered(url: String?) {
+        createNoteViewModel.onImageSelected(Uri.parse(url.orEmpty()))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

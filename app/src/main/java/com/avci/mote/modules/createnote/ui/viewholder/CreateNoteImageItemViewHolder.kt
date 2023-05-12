@@ -14,8 +14,13 @@ class CreateNoteImageItemViewHolder(
 
     override fun bind(item: BaseCreateNoteListItem) {
         if (item !is BaseCreateNoteListItem.BaseNoteComponentItem.ImageItem) return
-        binding.customImageLayout.setOnEditButtonClickListener {
-            listener.onEditButtonClicked(item.componentId)
+        binding.customImageLayout.apply {
+            setOnSelectImageButtonClickListener {
+                listener.onSelectImageButtonClicked(item.componentId)
+            }
+            setOnDownloadImageButtonClickListener {
+                listener.onDownloadImageButtonClicked(item.componentId)
+            }
         }
         if (item.uri.isBlank()) {
             binding.customImageLayout.removeImage()
@@ -38,7 +43,8 @@ class CreateNoteImageItemViewHolder(
     }
 
     interface CreateNoteImageItemListener {
-        fun onEditButtonClicked(componentId: Int)
+        fun onSelectImageButtonClicked(componentId: Int)
+        fun onDownloadImageButtonClicked(componentId: Int)
         fun onLoadImageFailed(componentId: Int)
         fun onDeleteButtonClicked(componentId: Int)
     }

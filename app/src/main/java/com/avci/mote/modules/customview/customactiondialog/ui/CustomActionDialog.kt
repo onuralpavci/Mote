@@ -48,6 +48,7 @@ class CustomActionDialog private constructor(context: Context) : Dialog(context)
             setDescriptionTextView(textRes = descriptionRes)
             setPrimaryButton(textRes = primaryButtonTextRes, onClick = primaryButtonClickListener)
             setSecondaryButton(textRes = secondaryButtonTextRes, onClick = secondaryButtonClickListener)
+            setTextInputLayout(textRes = textInputLayoutHintTextRes)
         }
     }
 
@@ -67,11 +68,11 @@ class CustomActionDialog private constructor(context: Context) : Dialog(context)
         binding.descriptionTextView.setTextAndVisibility(textRes)
     }
 
-    private fun setPrimaryButton(@StringRes textRes: Int?, onClick: (() -> Unit)?) {
+    private fun setPrimaryButton(@StringRes textRes: Int?, onClick: ((data: String?) -> Unit)?) {
         if (textRes == null) return
         with(binding.primaryActionButton) {
             setText(textRes)
-            setOnClickListener { onClick?.invoke(); dismiss() }
+            setOnClickListener { onClick?.invoke(binding.dialogTextInputLayout.text);dismiss() }
             this.show()
         }
     }
@@ -81,6 +82,14 @@ class CustomActionDialog private constructor(context: Context) : Dialog(context)
         with(binding.secondaryActionButton) {
             setText(textRes)
             setOnClickListener { onClick?.invoke(); dismiss() }
+            this.show()
+        }
+    }
+
+    private fun setTextInputLayout(@StringRes textRes: Int?) {
+        if (textRes == null) return
+        with(binding.dialogTextInputLayout) {
+            hint = context.getString(textRes)
             this.show()
         }
     }

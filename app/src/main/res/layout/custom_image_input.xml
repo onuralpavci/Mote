@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/spacing_normal"
-    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+    tools:parentTag="androidx.constraintlayout.motion.widget.MotionLayout">
 
     <ImageView
         android:id="@+id/selectedImageView"
@@ -16,18 +16,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/editButton"
-        style="@style/FloatingActionButton.Secondary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/spacing_normal"
-        android:layout_marginBottom="@dimen/spacing_normal"
-        app:fabCustomSize="56dp"
-        app:layout_constraintBottom_toBottomOf="@id/selectedImageView"
-        app:layout_constraintEnd_toEndOf="@id/selectedImageView"
-        app:srcCompat="@drawable/ic_pencil" />
 
     <ImageView
         android:id="@+id/placeholderView"
@@ -51,4 +39,39 @@
         app:layout_constraintEnd_toEndOf="@id/selectedImageView"
         app:layout_constraintTop_toTopOf="@id/selectedImageView" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/selectImageButton"
+        style="@style/FloatingActionButton.Secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        app:fabCustomSize="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/selectedImageView"
+        app:srcCompat="@drawable/ic_folder_open" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/downloadImageButton"
+        style="@style/FloatingActionButton.Secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        app:fabCustomSize="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/selectedImageView"
+        app:srcCompat="@drawable/ic_cloud_download" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/editButton"
+        style="@style/FloatingActionButton.Secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        app:fabCustomSize="56dp"
+        app:layout_constraintBottom_toBottomOf="@id/selectedImageView"
+        app:layout_constraintEnd_toEndOf="@id/selectedImageView"
+        app:srcCompat="@drawable/ic_pencil" />
 </merge>

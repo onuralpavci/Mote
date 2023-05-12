@@ -47,18 +47,32 @@
         tools:text="Write your detailed description for this modal here"
         tools:visibility="visible" />
 
+    <com.avci.mote.modules.customview.customsearchbar.ui.CustomSearchBarInputLayout
+        android:id="@+id/dialogTextInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptionTextView"
+        app:searchBarSingleLine="true"
+        tools:searchBarHint="@string/image_url"
+        tools:visibility="visible" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/secondaryActionButton"
         style="@style/Button.Secondary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="@dimen/spacing_normal"
         android:layout_marginEnd="@dimen/spacing_xsmall"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@id/primaryActionButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/descriptionTextView"
+        app:layout_constraintTop_toBottomOf="@id/dialogTextInputLayout"
+        app:layout_goneMarginTop="48dp"
         tools:text="Action"
         tools:visibility="visible" />
 
@@ -68,11 +82,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_xsmall"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="@dimen/spacing_normal"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/secondaryActionButton"
-        app:layout_constraintTop_toBottomOf="@id/descriptionTextView"
+        app:layout_constraintTop_toBottomOf="@id/dialogTextInputLayout"
+        app:layout_goneMarginTop="48dp"
         tools:text="Action"
         tools:visibility="visible" />
 

@@ -9,6 +9,7 @@ data class ActionDialogParams(
     @StringRes var descriptionRes: Int? = null,
     @StringRes var primaryButtonTextRes: Int? = null,
     @StringRes var secondaryButtonTextRes: Int? = null,
-    var primaryButtonClickListener: (() -> Unit)? = null,
+    @StringRes var textInputLayoutHintTextRes: Int? = null,
+    var primaryButtonClickListener: ((data: String?) -> Unit)? = null,
     var secondaryButtonClickListener: (() -> Unit)? = null
 )

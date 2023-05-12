@@ -3,6 +3,7 @@
     package="com.avci.mote">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name="com.avci.mote.modules.core.NoteApp"
