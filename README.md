@@ -2,7 +2,7 @@
 Mote is a comprehensive note-taking app built on Clean Architecture and MVVM. The app allows users to create, edit, and manage their notes in an intuitive and efficient way. From simple text-based notes to image attachments, Mote provides a platform for users to capture their thoughts, ideas, and tasks. The app also includes search functionality to easily find specific notes. Comprehensive Unit Tests over Data, Domain, and UI layers ensure the reliability and robustness of the application.
 ### All requirements for a feature-rich note taking app are fulfilled with user experience at the core
 # Screenshots
-  
+<body>
   <img src="https://github.com/onuralpavci/Mote/assets/63224890/302661c9-36de-46fb-a876-348f7f0fdab4" style="width: 45%;">
   <img src="https://github.com/onuralpavci/Mote/assets/63224890/db160b3a-8a72-4443-9234-22c410ec30d6" style="width: 45%;">
   <br>

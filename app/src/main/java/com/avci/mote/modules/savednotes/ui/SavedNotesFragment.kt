@@ -11,7 +11,6 @@ import com.avci.mote.databinding.FragmentSavedNotesBinding
 import com.avci.mote.modules.core.ui.BaseFragment
 import com.avci.mote.modules.core.ui.model.FragmentConfiguration
 import com.avci.mote.modules.core.ui.model.ToolbarConfiguration
-import com.avci.mote.modules.notes.ui.NotesFragment
 import com.avci.mote.modules.notes.ui.viewholder.SpacesItemDecoration
 import com.avci.mote.modules.savednotes.ui.model.SavedNotesPreview
 import com.avci.mote.modules.searchnotes.ui.SearchNotesFragmentDirections
