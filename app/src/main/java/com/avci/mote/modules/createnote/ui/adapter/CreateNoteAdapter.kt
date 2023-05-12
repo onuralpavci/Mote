@@ -49,8 +49,12 @@ class CreateNoteAdapter(
     }
 
     private val createNoteItemItemListener = object : CreateNoteImageItemListener {
-        override fun onEditButtonClicked(componentId: Int) {
+        override fun onSelectImageButtonClicked(componentId: Int) {
             listener.onImageEditButtonClicked(componentId)
+        }
+
+        override fun onDownloadImageButtonClicked(componentId: Int) {
+            listener.onDownloadEditButtonClicked(componentId)
         }
 
         override fun onLoadImageFailed(componentId: Int) {
@@ -91,6 +95,7 @@ class CreateNoteAdapter(
         fun onTextAreaTextChanged(text: String, componentId: Int)
         fun onTextAreaEmptyTextDeleted(componentId: Int)
         fun onImageEditButtonClicked(componentId: Int)
+        fun onDownloadEditButtonClicked(componentId: Int)
         fun onImageLoadImageFailed(componentId: Int)
         fun onImageDeleteButtonClicked(componentId: Int)
     }

@@ -6,7 +6,7 @@ import com.avci.mote.modules.customview.customactiondialog.ui.CustomActionDialog
 import com.avci.mote.modules.customview.customactiondialog.ui.model.ActionDialogParams
 
 fun Context.showDeleteNoteActionDialog(
-    onDeleteClickListener: (() -> Unit),
+    onDeleteClickListener: ((data: String?) -> Unit),
     onCancelClickListener: (() -> Unit)? = null
 ) {
     CustomActionDialog.create(this).apply {
@@ -33,6 +33,27 @@ fun Context.showNoteSavedActionDialog() {
                 titleRes = R.string.saved_exclamation,
                 descriptionRes = R.string.your_note_is,
                 secondaryButtonTextRes = R.string.close
+            )
+        )
+        show()
+    }
+}
+
+fun Context.showEnterUrlActionDialog(
+    onDoneClickListener: ((url: String?) -> Unit),
+    onCancelClickListener: (() -> Unit)? = null
+) {
+    CustomActionDialog.create(this).apply {
+        applyParams(
+            ActionDialogParams(
+                startImageRes = R.drawable.ic_image,
+                titleRes = R.string.enter_image_url,
+                descriptionRes = R.string.save_url_requires,
+                primaryButtonTextRes = R.string.done,
+                secondaryButtonTextRes = R.string.close,
+                primaryButtonClickListener = onDoneClickListener,
+                secondaryButtonClickListener = onCancelClickListener,
+                textInputLayoutHintTextRes = R.string.enter_image_url
             )
         )
         show()

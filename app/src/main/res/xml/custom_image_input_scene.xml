@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+        <ConstraintOverride
+            android:id="@id/selectedImageView"
+            app:visibilityMode="ignore" />
+        <ConstraintOverride
+            android:id="@id/editButton"
+            app:visibilityMode="ignore" />
+        <ConstraintOverride
+            android:id="@id/placeholderView"
+            app:visibilityMode="ignore" />
+        <ConstraintOverride
+            android:id="@id/deleteButton"
+            app:visibilityMode="ignore" />
+        <Constraint
+            android:id="@id/selectImageButton"
+            style="@style/FloatingActionButton.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            app:fabCustomSize="56dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/selectedImageView"
+            app:srcCompat="@drawable/ic_folder_open"
+            app:visibilityMode="ignore" />
+
+        <Constraint
+            android:id="@id/downloadImageButton"
+            style="@style/FloatingActionButton.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            app:fabCustomSize="56dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/selectedImageView"
+            app:srcCompat="@drawable/ic_cloud_download"
+            app:visibilityMode="ignore" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <ConstraintOverride
+            android:id="@id/selectedImageView"
+            app:visibilityMode="ignore" />
+        <ConstraintOverride
+            android:id="@id/editButton"
+            app:visibilityMode="ignore" />
+        <ConstraintOverride
+            android:id="@id/placeholderView"
+            app:visibilityMode="ignore" />
+        <ConstraintOverride
+            android:id="@id/deleteButton"
+            app:visibilityMode="ignore" />
+        <Constraint
+            android:id="@id/selectImageButton"
+            style="@style/FloatingActionButton.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            app:fabCustomSize="56dp"
+            app:layout_constraintBottom_toTopOf="@id/editButton"
+            app:layout_constraintEnd_toEndOf="@id/selectedImageView"
+            app:srcCompat="@drawable/ic_folder_open"
+            app:visibilityMode="ignore" />
+
+        <Constraint
+            android:id="@id/downloadImageButton"
+            style="@style/FloatingActionButton.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            app:fabCustomSize="56dp"
+            app:layout_constraintBottom_toTopOf="@id/selectImageButton"
+            app:layout_constraintEnd_toEndOf="@id/selectedImageView"
+            app:srcCompat="@drawable/ic_cloud_download"
+            app:visibilityMode="ignore" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start" />
+</MotionScene>
