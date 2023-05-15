@@ -69,4 +69,8 @@
     <string name="done">Done</string>
     <string name="image_url">Image URL</string>
     <string name="save_url_requires">Save URL requires internet. Placeholder shown when offline.</string>
+
+    <string name="keep_empty_note">Keep Empty Note?</string>
+    <string name="your_note_does">Your note doesn\'t have any content.\nWould you like to keep it anyway, or should we delete it for you?</string>
+    <string name="keep">Keep</string>
 </resources>

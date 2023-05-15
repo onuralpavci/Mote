@@ -26,7 +26,6 @@ class NoteCardItemViewHolder(
             }
             noteContentTextView.apply {
                 text = item.content ?: context.getString(item.emptyContentResId)
-
             }
             if (item.imageUri == null || item.imageUri.isBlank()) {
                 configureNoImage()
