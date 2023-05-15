@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:elevation="@dimen/note_card_item_elevation"
     android:layout_marginBottom="@dimen/spacing_small"
     android:background="@drawable/bg_note_card"
     android:minHeight="@dimen/note_card_item_min_height">
