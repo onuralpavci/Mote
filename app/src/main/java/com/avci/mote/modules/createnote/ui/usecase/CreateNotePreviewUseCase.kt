@@ -22,6 +22,9 @@ import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.BaseActionItem.AddImageActionItem
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.BaseActionItem.AddTextAreaActionItem
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.BaseActionItem.AskChatGPTActionItem
+import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.BaseNoteComponentItem.ImageItem
+import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.BaseNoteComponentItem.TextAreaItem
+import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.TitleItem
 import com.avci.mote.modules.createnote.ui.model.CreateNotePreview
 import com.avci.mote.modules.notes.ui.usecase.GetCreateNoteDateUseCase
 import com.avci.mote.modules.notes.ui.usecase.GetUpdateNoteDateUseCase
@@ -54,7 +57,7 @@ class CreateNotePreviewUseCase @Inject constructor(
         return createNewNoteUseCase.invoke()
     }
 
-    suspend fun getCreateNotePreviewFlow(noteId: Int): Flow<CreateNotePreview> {
+    suspend fun getCreateNotePreviewFlow(noteId: Int, isNewNote: Boolean): Flow<CreateNotePreview> {
         return getNoteFlowUseCase.invoke(noteId).map {
             if (it == null) {
                 createNotePreviewMapper.mapToErrorPreview()
@@ -63,6 +66,7 @@ class CreateNotePreviewUseCase @Inject constructor(
                 val updateDate = it.updateTimeStamp?.let { getUpdateNoteDateUseCase.invoke(it) }
                 createNotePreviewMapper.mapTo(
                     id = it.id,
+                    isNewNote = isNewNote,
                     createNoteListItems = createNoteListItems(it),
                     createDate = createDate,
                     updateDate = updateDate,
@@ -136,6 +140,16 @@ class CreateNotePreviewUseCase @Inject constructor(
         updateNoteIsSavedUseCase.invoke(noteId, isSaved)
     }
 
+    fun updatePreviewWithNavBackEvent(previousPreview: CreateNotePreview): CreateNotePreview {
+        val isNewNote = previousPreview.isNewNote
+        val isEmptyNote = getIfEmptyNote(previousPreview)
+        return if (isNewNote && isEmptyNote) {
+            createNotePreviewMapper.mapToShowDeleteEmptyNoteEventPreview(previousPreview)
+        } else {
+            createNotePreviewMapper.mapToNavBackEventPreview(previousPreview)
+        }
+    }
+
     private fun createNoteListItems(note: Note): List<BaseCreateNoteListItem> {
         return mutableListOf<BaseCreateNoteListItem>().apply {
             val titleItem = getTitleItem(note.title)
@@ -155,8 +169,8 @@ class CreateNotePreviewUseCase @Inject constructor(
         }
     }
 
-    private fun getTitleItem(title: String?): BaseCreateNoteListItem.TitleItem {
-        return BaseCreateNoteListItem.TitleItem(title.orEmpty())
+    private fun getTitleItem(title: String?): TitleItem {
+        return TitleItem(title.orEmpty())
     }
 
     private fun getDividerItem(): BaseCreateNoteListItem.DividerItem {
@@ -194,4 +208,20 @@ class CreateNotePreviewUseCase @Inject constructor(
     private suspend fun addImageComponent(noteId: Int) {
         createNewNoteImageUseCase.invoke(noteId)
     }
+
+    private fun getIfEmptyNote(previousPreview: CreateNotePreview): Boolean {
+        val listItems = previousPreview.createNoteListItems
+        with(listItems) {
+            val titleItem = filterIsInstance<TitleItem>().firstOrNull()
+            val textAreaItems = filterIsInstance<TextAreaItem>()
+            val imageItems = filterIsInstance<ImageItem>()
+
+            val isTitleEmpty = titleItem?.title?.isEmpty() == true
+            val areTextAreasEmpty = textAreaItems.all { it.text.isEmpty() }
+            val areImagesEmpty = imageItems.all { it.uri.isEmpty() }
+
+            return isTitleEmpty && areTextAreasEmpty && areImagesEmpty
+        }
+    }
+
 }

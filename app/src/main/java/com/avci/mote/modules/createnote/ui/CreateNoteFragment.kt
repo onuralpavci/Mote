@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.avci.mote.R
@@ -15,6 +16,7 @@ import com.avci.mote.modules.core.ui.model.ToolbarConfiguration
 import com.avci.mote.modules.createnote.ui.adapter.CreateNoteAdapter
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem
 import com.avci.mote.modules.createnote.ui.model.CreateNotePreview
+import com.avci.mote.modules.customview.customactiondialog.ui.providers.showDeleteEmptyNoteActionDialog
 import com.avci.mote.modules.customview.customactiondialog.ui.providers.showDeleteNoteActionDialog
 import com.avci.mote.modules.customview.customactiondialog.ui.providers.showEnterUrlActionDialog
 import com.avci.mote.modules.customview.customactiondialog.ui.providers.showNoteSavedActionDialog
@@ -28,7 +30,7 @@ import kotlinx.coroutines.launch
 class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
 
     private val toolbarConfiguration = ToolbarConfiguration(
-        onBackButtonClicked = ::navBack
+        onBackButtonClicked = ::onNavigateBack
     )
     override val fragmentConfiguration = FragmentConfiguration(
         isBottomNavigationViewVisible = false,
@@ -79,10 +81,26 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
 
     private val createNoteAdapter = CreateNoteAdapter(createNoteAdapterListener)
 
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            onNavigateBack()
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUi()
         initObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        onBackPressedCallback.isEnabled = true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        onBackPressedCallback.isEnabled = false
     }
 
     private fun initUi() {
@@ -96,6 +114,7 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
                     createNoteViewModel.updateIsnNoteSaved()
                 }
             }
+            activity?.onBackPressedDispatcher?.addCallback(onBackPressedCallback)
         }
     }
 
@@ -114,9 +133,21 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
                 setContent(preview.updateDate ?: preview.createDate)
                 setBookMarkChecked(preview.isSaved)
             }
-            openChatGPTEvent?.consume()?.let { context?.openChatGPT() }
-            navBackEvent?.consume()?.let { navBack() }
-            showSaveSuccessDialogEvent?.consume()?.let { context?.showNoteSavedActionDialog() }
+            openChatGPTEvent?.consume()?.let {
+                context?.openChatGPT()
+            }
+            navBackEvent?.consume()?.let {
+                navBack()
+            }
+            showSaveSuccessDialogEvent?.consume()?.let {
+                context?.showNoteSavedActionDialog()
+            }
+            showDeleteEmptyNoteActionDialogEvent?.consume()?.let {
+                context?.showDeleteEmptyNoteActionDialog(
+                    onDeleteClickListener = ::deleteNote,
+                    onKeepClickListener = ::navBack
+                )
+            }
         }
     }
 
@@ -137,6 +168,10 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
 
     private fun onImageUrlEntered(url: String?) {
         createNoteViewModel.onImageSelected(Uri.parse(url.orEmpty()))
+    }
+
+    private fun onNavigateBack() {
+        createNoteViewModel.onNavigateBack()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

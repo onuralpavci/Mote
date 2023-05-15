@@ -119,10 +119,19 @@ class CreateNoteViewModel @Inject constructor(
         }
     }
 
+    fun onNavigateBack() {
+        viewModelScope.launch {
+            _createNotePreviewFlow.emit(
+                createNotePreviewUseCase.updatePreviewWithNavBackEvent(_createNotePreviewFlow.value)
+            )
+        }
+    }
+
     private fun initPreviewFlow() {
         viewModelScope.launch(Dispatchers.IO) {
-            val noteId = if (args.noteId == NEW_NOTE_ID) createNewNote() else args.noteId
-            createNotePreviewUseCase.getCreateNotePreviewFlow(noteId).collectLatest {
+            val isNewNote = args.noteId == NEW_NOTE_ID
+            val noteId = if (isNewNote) createNewNote() else args.noteId
+            createNotePreviewUseCase.getCreateNotePreviewFlow(noteId = noteId, isNewNote = isNewNote).collectLatest {
                 _createNotePreviewFlow.emit(it)
             }
         }
