@@ -54,7 +54,10 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
             createNoteViewModel.onTextAreaInputChanged(text = text, componentId = componentId)
         }
 
-        override fun onTextAreaEmptyTextDeleted(componentId: Int) {
+        override fun onTextAreaEmptyTextDeleted(componentId: Int, adapterPosition: Int) {
+            val previousItemPosition = adapterPosition - 1
+            binding.createNoteRecyclerView.findViewHolderForAdapterPosition(previousItemPosition)
+                ?.itemView?.requestFocus()
             createNoteViewModel.onTextAreaEmptyTextDeleted(componentId)
         }
 

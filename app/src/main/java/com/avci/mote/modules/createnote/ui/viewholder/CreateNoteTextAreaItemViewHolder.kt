@@ -20,7 +20,7 @@ class CreateNoteTextAreaItemViewHolder(
                 listener.onTextChanged(text = text, componentId = item.componentId)
             }
             setOnEmptyTextDeleteListener {
-                listener.onEmptyTextDeleted(componentId = item.componentId)
+                listener.onEmptyTextDeleted(componentId = item.componentId, adapterPosition = adapterPosition)
             }
         }
     }
@@ -34,6 +34,6 @@ class CreateNoteTextAreaItemViewHolder(
 
     interface CreateNoteTextAreaItemListener {
         fun onTextChanged(text: String, componentId: Int)
-        fun onEmptyTextDeleted(componentId: Int)
+        fun onEmptyTextDeleted(componentId: Int, adapterPosition: Int)
     }
 }
