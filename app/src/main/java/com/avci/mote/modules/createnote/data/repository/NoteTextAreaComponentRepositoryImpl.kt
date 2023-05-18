@@ -25,4 +25,8 @@ class NoteTextAreaComponentRepositoryImpl(
     override suspend fun updateTextAreaText(componentId: Int, newText: String?) {
         noteTextAreaDao.updateTextAreaText(componentId = componentId, newText = newText)
     }
+
+    override suspend fun updateTextAreaOrder(componentId: Int, newOrder: Int) {
+        noteTextAreaDao.updateTextAreaOrder(componentId = componentId, newOrder = newOrder)
+    }
 }
