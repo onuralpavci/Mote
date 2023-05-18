@@ -101,4 +101,7 @@ dependencies {
 
     // Browser
     implementation "androidx.browser:browser:${libVersions.browser}"
+
+    // Recyclerview
+    implementation "androidx.recyclerview:recyclerview:${libVersions.recyclerview}"
 }

@@ -25,4 +25,8 @@ class NoteImageComponentRepositoryImpl(
     override suspend fun getImageHighestOrder(noteId: Int): Int? {
         return noteImageDao.getNoteImagesHighestOrder(noteId)
     }
+
+    override suspend fun updateNoteImageOrder(componentId: Int, newOrder: Int) {
+        noteImageDao.updateNoteImageOrder(componentId = componentId, newOrder = newOrder)
+    }
 }

@@ -11,9 +11,11 @@ import com.avci.mote.modules.createnote.domain.usecase.DeleteNoteImageUseCase
 import com.avci.mote.modules.createnote.domain.usecase.DeleteNoteTextAreaUseCase
 import com.avci.mote.modules.createnote.domain.usecase.DeleteNoteUseCase
 import com.avci.mote.modules.createnote.domain.usecase.GetNoteFlowUseCase
+import com.avci.mote.modules.createnote.domain.usecase.UpdateNoteImageOrderUseCase
 import com.avci.mote.modules.createnote.domain.usecase.UpdateNoteImageUriUseCase
 import com.avci.mote.modules.createnote.domain.usecase.UpdateNoteIsSavedUseCase
 import com.avci.mote.modules.createnote.domain.usecase.UpdateNoteLastEditDateUseCase
+import com.avci.mote.modules.createnote.domain.usecase.UpdateNoteTextAreaOrderUseCase
 import com.avci.mote.modules.createnote.domain.usecase.UpdateNoteTextAreaTextUseCase
 import com.avci.mote.modules.createnote.domain.usecase.UpdateNoteTitleUseCase
 import com.avci.mote.modules.createnote.ui.mapper.BaseNoteComponentMapper
@@ -47,6 +49,8 @@ class CreateNotePreviewUseCase @Inject constructor(
     private val updateNoteLastEditDateUseCase: UpdateNoteLastEditDateUseCase,
     private val deleteNoteUseCase: DeleteNoteUseCase,
     private val updateNoteIsSavedUseCase: UpdateNoteIsSavedUseCase,
+    private val updateNoteImageOrderUseCase: UpdateNoteImageOrderUseCase,
+    private val updateNoteTextAreaOrderUseCase: UpdateNoteTextAreaOrderUseCase,
     private val createNotePreviewMapper: CreateNotePreviewMapper,
     private val baseNoteComponentMapper: BaseNoteComponentMapper
 ) {
@@ -147,6 +151,26 @@ class CreateNotePreviewUseCase @Inject constructor(
             createNotePreviewMapper.mapToShowDeleteEmptyNoteEventPreview(previousPreview)
         } else {
             createNotePreviewMapper.mapToNavBackEventPreview(previousPreview)
+        }
+    }
+
+    fun getSwapItemUpdatedPreview(
+        previousPreview: CreateNotePreview,
+        fromPosition: Int,
+        toPosition: Int
+    ): CreateNotePreview {
+        val currentItemList = previousPreview.createNoteListItems.toMutableList()
+        val fromItem = currentItemList.removeAt(fromPosition)
+        currentItemList.add(toPosition, fromItem)
+        return previousPreview.copy(createNoteListItems = currentItemList)
+    }
+
+    suspend fun updateNoteComponentOrders(noteComponentList: List<BaseCreateNoteListItem>) {
+        noteComponentList.forEachIndexed { index, item ->
+            when (item) {
+                is TextAreaItem -> updateNoteTextAreaOrderUseCase.invoke(item.componentId, index)
+                is ImageItem -> updateNoteImageOrderUseCase.invoke(item.componentId, index)
+            }
         }
     }
 

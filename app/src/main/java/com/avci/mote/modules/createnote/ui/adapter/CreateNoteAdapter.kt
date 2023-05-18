@@ -45,6 +45,10 @@ class CreateNoteAdapter(
         override fun onEmptyTextDeleted(componentId: Int, adapterPosition: Int) {
             listener.onTextAreaEmptyTextDeleted(componentId = componentId, adapterPosition = adapterPosition)
         }
+
+        override fun onDragged(viewHolder: CreateNoteTextAreaItemViewHolder) {
+            listener.onSortableItemPressed(viewHolder)
+        }
     }
 
     private val createNoteItemItemListener = object : CreateNoteImageItemListener {
@@ -64,6 +68,9 @@ class CreateNoteAdapter(
             listener.onImageDeleteButtonClicked(componentId)
         }
 
+        override fun onDragged(viewHolder: CreateNoteImageItemViewHolder) {
+            listener.onSortableItemPressed(viewHolder)
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -97,6 +104,7 @@ class CreateNoteAdapter(
         fun onDownloadEditButtonClicked(componentId: Int)
         fun onImageLoadImageFailed(componentId: Int)
         fun onImageDeleteButtonClicked(componentId: Int)
+        fun onSortableItemPressed(viewHolder: BaseViewHolder<BaseCreateNoteListItem>)
     }
 
     companion object {

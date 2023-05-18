@@ -127,6 +127,23 @@ class CreateNoteViewModel @Inject constructor(
         }
     }
 
+    fun onNoteComponentItemMoved(fromPosition: Int, toPosition: Int) {
+        _createNotePreviewFlow.apply {
+            value = createNotePreviewUseCase.getSwapItemUpdatedPreview(
+                previousPreview = value,
+                fromPosition = fromPosition,
+                toPosition = toPosition
+            )
+        }
+    }
+
+    fun updateNoteComponentOrders() {
+        val noteComponentList = _createNotePreviewFlow.value.createNoteListItems
+        viewModelScope.launch {
+            createNotePreviewUseCase.updateNoteComponentOrders(noteComponentList)
+        }
+    }
+
     private fun initPreviewFlow() {
         viewModelScope.launch(Dispatchers.IO) {
             val isNewNote = args.noteId == NEW_NOTE_ID
