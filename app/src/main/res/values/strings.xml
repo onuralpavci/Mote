@@ -13,11 +13,12 @@
 
     <string name="title_here">Title Here</string>
     <string name="write_your_notes">Write your notes here…</string>
+    <string name="heading_here">Heading Here…</string>
 
     <string name="add_free_text">Add Free Text Area</string>
+    <string name="add_heading">Add Heading</string>
     <string name="add_checklist">Add Checklist</string>
     <string name="add_image">Add Image</string>
-    <string name="add_heading">Add Heading</string>
     <string name="ask_chatgpt">Ask ChatGPT</string>
 
     <string name="actions">Actions</string>

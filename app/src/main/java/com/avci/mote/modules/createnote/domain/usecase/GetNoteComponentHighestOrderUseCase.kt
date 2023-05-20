@@ -1,5 +1,6 @@
 package com.avci.mote.modules.createnote.domain.usecase
 
+import com.avci.mote.modules.createnote.domain.repository.NoteHeadingComponentRepository
 import com.avci.mote.modules.createnote.domain.repository.NoteImageComponentRepository
 import com.avci.mote.modules.createnote.domain.repository.NoteImageComponentRepository.Companion.NOTE_IMAGE_COMPONENT_REPOSITORY_INJECTION_NAME
 import com.avci.mote.modules.createnote.domain.repository.NoteTextAreaComponentRepository
@@ -11,12 +12,15 @@ class GetNoteComponentHighestOrderUseCase @Inject constructor(
     @Named(NOTE_IMAGE_COMPONENT_REPOSITORY_INJECTION_NAME)
     private val noteImageComponentRepository: NoteImageComponentRepository,
     @Named(NOTE_TEXT_AREA_COMPONENT_REPOSITORY_INJECTION_NAME)
-    private val noteTextAreaComponentRepository: NoteTextAreaComponentRepository
+    private val noteTextAreaComponentRepository: NoteTextAreaComponentRepository,
+    @Named(NoteHeadingComponentRepository.NOTE_HEADING_COMPONENT_REPOSITORY_INJECTION_NAME)
+    private val noteHeadingComponentRepository: NoteHeadingComponentRepository,
 ) {
     suspend operator fun invoke(noteId: Int): Int {
         return maxOf<Int>(
             noteTextAreaComponentRepository.getTextAreaHighestOrder(noteId) ?: DEFAULT_NOTE_COMPONENT_ORDER,
-            noteImageComponentRepository.getImageHighestOrder(noteId) ?: DEFAULT_NOTE_COMPONENT_ORDER
+            noteImageComponentRepository.getImageHighestOrder(noteId) ?: DEFAULT_NOTE_COMPONENT_ORDER,
+            noteHeadingComponentRepository.getHeadingHighestOrder(noteId) ?: DEFAULT_NOTE_COMPONENT_ORDER,
         )
     }
 
