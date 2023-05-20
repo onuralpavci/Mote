@@ -34,6 +34,8 @@ class CreateNoteViewModel @Inject constructor(
 
     private val textAreaInputFlow = MutableStateFlow<Pair<Int, String>?>(null)
 
+    private val headingInputFlow = MutableStateFlow<Pair<Int, String>?>(null)
+
     private val isNewNote: Boolean
         get() = args.noteId == NEW_NOTE_ID
 
@@ -70,9 +72,25 @@ class CreateNoteViewModel @Inject constructor(
         }
     }
 
+    fun onHeadingInputChanged(text: String, componentId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            headingInputFlow.emit(Pair(componentId, text))
+        }
+    }
+
     fun onTextAreaEmptyTextDeleted(componentId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             createNotePreviewUseCase.deleteNoteTextArea(
+                noteId = args.noteId,
+                componentId = componentId,
+                shouldUpdateTime = isNewNote.not()
+            )
+        }
+    }
+
+    fun onHeadingEmptyTextDeleted(componentId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            createNotePreviewUseCase.deleteNoteHeading(
                 noteId = args.noteId,
                 componentId = componentId,
                 shouldUpdateTime = isNewNote.not()
@@ -177,6 +195,19 @@ class CreateNoteViewModel @Inject constructor(
                     }
                 }
         }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            headingInputFlow
+                .drop(1)
+                .debounce(HEADING_INPUT_DEBOUNCE)
+                .distinctUntilChanged()
+                .collectLatest { idTextPair ->
+                    idTextPair?.let {
+                        val (componentId, text) = it
+                        updateHeadingInput(componentId = componentId, text = text)
+                    }
+                }
+        }
     }
 
     private suspend fun createNewNote(): Int {
@@ -200,6 +231,15 @@ class CreateNoteViewModel @Inject constructor(
         )
     }
 
+    private suspend fun updateHeadingInput(text: String?, componentId: Int) {
+        createNotePreviewUseCase.updateNoteHeadingText(
+            noteId = args.noteId,
+            componentId = componentId,
+            newText = text,
+            shouldUpdateTime = isNewNote.not()
+        )
+    }
+
     private fun getNoteId(): Int {
         return _createNotePreviewFlow.value.noteId
     }
@@ -212,5 +252,6 @@ class CreateNoteViewModel @Inject constructor(
         const val NEW_NOTE_ID = -1
         const val TITLE_INPUT_DEBOUNCE = 1000L
         const val TEXT_AREA_INPUT_DEBOUNCE = 1000L
+        const val HEADING_INPUT_DEBOUNCE = 1000L
     }
 }

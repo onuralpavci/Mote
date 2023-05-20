@@ -14,7 +14,7 @@ import com.avci.mote.modules.customview.delegation.draggableitemviewdelegation.D
 import com.avci.mote.utils.viewbinding.viewBinding
 import kotlin.properties.Delegates
 
-class CustomTextAreaInput @JvmOverloads constructor(
+class CustomTextInputLayout @JvmOverloads constructor(
     context: Context,
     private val attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs),
@@ -47,6 +47,10 @@ class CustomTextAreaInput @JvmOverloads constructor(
         editText.isSingleLine = newValue
     }
 
+    private var textAppearance by Delegates.observable(-1) { _, _, newValue ->
+        editText.setTextAppearance(newValue)
+    }
+
     private var maxCharacter by Delegates.observable(-1) { _, _, newValue ->
         if (newValue != -1) {
             with(editText) {
@@ -67,6 +71,7 @@ class CustomTextAreaInput @JvmOverloads constructor(
             hint = attrs.getString(R.styleable.CustomTextAreaInputLayout_textAreaHint).orEmpty()
             isSingleLine = attrs.getBoolean(R.styleable.CustomTextAreaInputLayout_textAreaSingleLine, false)
             maxCharacter = attrs.getInteger(R.styleable.CustomTextAreaInputLayout_textAreaMaxCharacter, -1)
+            textAppearance = attrs.getResourceId(R.styleable.CustomTextAreaInputLayout_textAreaTextAppearance, -1)
         }
     }
 

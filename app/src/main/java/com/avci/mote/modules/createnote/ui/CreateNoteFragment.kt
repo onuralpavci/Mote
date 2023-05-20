@@ -64,6 +64,17 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
             createNoteViewModel.onTextAreaEmptyTextDeleted(componentId)
         }
 
+        override fun onHeadingTextChanged(text: String, componentId: Int) {
+            createNoteViewModel.onHeadingInputChanged(text = text, componentId = componentId)
+        }
+
+        override fun onHeadingEmptyTextDeleted(componentId: Int, adapterPosition: Int) {
+            val previousItemPosition = adapterPosition - 1
+            binding.createNoteRecyclerView.findViewHolderForAdapterPosition(previousItemPosition)
+                ?.itemView?.requestFocus()
+            createNoteViewModel.onHeadingEmptyTextDeleted(componentId)
+        }
+
         override fun onImageEditButtonClicked(componentId: Int) {
             // TODO: Find a better way to get update image component id
             createNoteViewModel.imageComponentIdToUpdate = componentId

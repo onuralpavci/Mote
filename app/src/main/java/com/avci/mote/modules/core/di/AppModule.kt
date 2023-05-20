@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import com.avci.mote.database.NoteDatabase
 import com.avci.mote.database.NoteDatabase.Companion.MIGRATION_1_2
+import com.avci.mote.database.NoteDatabase.Companion.MIGRATION_2_3
 import com.avci.mote.database.dao.NoteDao
+import com.avci.mote.database.dao.NoteHeadingDao
 import com.avci.mote.database.dao.NoteImageDao
 import com.avci.mote.database.dao.NoteTextAreaDao
 import dagger.Module
@@ -26,6 +28,7 @@ object AppModule {
             .databaseBuilder(appContext, NoteDatabase::class.java, NoteDatabase.DATABASE_NAME)
             .fallbackToDestructiveMigration()
             .addMigrations(MIGRATION_1_2)
+            .addMigrations(MIGRATION_2_3)
             .build()
     }
 
@@ -45,5 +48,11 @@ object AppModule {
     @Provides
     fun provideNoteImageDao(database: NoteDatabase): NoteImageDao {
         return database.noteImageDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideNoteHeadingDao(database: NoteDatabase): NoteHeadingDao {
+        return database.noteHeadingDao()
     }
 }

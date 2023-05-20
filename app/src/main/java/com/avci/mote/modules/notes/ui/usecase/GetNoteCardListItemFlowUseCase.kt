@@ -26,6 +26,7 @@ class GetNoteCardListItemFlowUseCase @Inject constructor(
                 val imageComponent = noteComponents.filterIsInstance<ImageComponent>().firstOrNull {
                     it.uri?.isNotBlank() == true
                 }
+                // TODO: When base TextComponent class is created, replace TextAreaComponent with it
                 val textAreaComponent = noteComponents.filterIsInstance<TextAreaComponent>().firstOrNull {
                     it.text?.isNotBlank() == true
                 }

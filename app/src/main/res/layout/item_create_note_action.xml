@@ -11,5 +11,5 @@
     android:textAppearance="@style/TextAppearance.SM.Inter.Medium"
     android:textColor="@color/primary"
     app:drawableTint="@color/primary"
-    tools:drawableStart="@drawable/ic_plus"
+    tools:drawableStart="@drawable/ic_heading"
     tools:text="Actions" />
