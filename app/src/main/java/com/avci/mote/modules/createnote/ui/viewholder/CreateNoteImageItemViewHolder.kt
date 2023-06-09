@@ -25,6 +25,9 @@ class CreateNoteImageItemViewHolder(
             setOnDownloadImageButtonClickListener {
                 listener.onDownloadImageButtonClicked(item.componentId)
             }
+            setOnDalleClickListener {
+                listener.onDalleClickListener(item.componentId)
+            }
             if (item.uri.isBlank()) {
                 removeImage()
             } else {
@@ -44,8 +47,15 @@ class CreateNoteImageItemViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup, listener: CreateNoteImageItemListener): CreateNoteImageItemViewHolder {
-            val binding = ItemCreateNoteImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        fun create(
+            parent: ViewGroup,
+            listener: CreateNoteImageItemListener
+        ): CreateNoteImageItemViewHolder {
+            val binding = ItemCreateNoteImageBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
             return CreateNoteImageItemViewHolder(binding, listener)
         }
     }
@@ -53,6 +63,7 @@ class CreateNoteImageItemViewHolder(
     interface CreateNoteImageItemListener {
         fun onSelectImageButtonClicked(componentId: Int)
         fun onDownloadImageButtonClicked(componentId: Int)
+        fun onDalleClickListener(componentId: Int)
         fun onLoadImageFailed(componentId: Int)
         fun onDeleteButtonClicked(componentId: Int)
         fun onDragged(viewHolder: CreateNoteImageItemViewHolder)

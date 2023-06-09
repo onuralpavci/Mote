@@ -50,6 +50,19 @@
             app:layout_constraintEnd_toEndOf="@id/selectedImageView"
             app:srcCompat="@drawable/ic_delete"
             app:visibilityMode="ignore" />
+
+        <Constraint
+            android:id="@id/dalleButton"
+            style="@style/FloatingActionButton.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            app:fabCustomSize="56dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/selectedImageView"
+            app:srcCompat="@drawable/ic_chatgpt"
+            app:visibilityMode="ignore" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -99,6 +112,20 @@
             app:layout_constraintEnd_toStartOf="@id/editButton"
             app:srcCompat="@drawable/ic_delete"
             app:visibilityMode="ignore" />
+
+        <Constraint
+            android:id="@id/dalleButton"
+            style="@style/FloatingActionButton.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            app:fabCustomSize="56dp"
+            app:layout_constraintBottom_toTopOf="@id/editButton"
+            app:layout_constraintEnd_toStartOf="@id/editButton"
+            app:srcCompat="@drawable/ic_chatgpt"
+            app:visibilityMode="ignore" />
+
     </ConstraintSet>
 
     <Transition

@@ -1,5 +1,6 @@
 package com.avci.mote.modules.createnote.ui
 
+import android.app.VoiceInteractor.Prompt
 import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -118,6 +119,10 @@ class CreateNoteViewModel @Inject constructor(
                 shouldUpdateTime = isNewNote.not()
             )
         }
+    }
+
+    fun onDallePromptEntered(prompt: String?) {
+
     }
 
     fun deleteNote() {

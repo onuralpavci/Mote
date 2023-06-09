@@ -60,6 +60,27 @@ fun Context.showEnterUrlActionDialog(
     }
 }
 
+fun Context.showEnterDallePromptDialog(
+    onDoneClickListener: ((prompt: String?) -> Unit),
+    onCancelClickListener: (() -> Unit)? = null
+) {
+    CustomActionDialog.create(this).apply {
+        applyParams(
+            ActionDialogParams(
+                startImageRes = R.drawable.ic_image,
+                titleRes = R.string.create_image_with,
+                primaryButtonTextRes = R.string.done,
+                secondaryButtonTextRes = R.string.close,
+                primaryButtonClickListener = onDoneClickListener,
+                secondaryButtonClickListener = onCancelClickListener,
+                textInputLayoutHintTextRes = R.string.describe_the_image
+            )
+        )
+        show()
+    }
+}
+
+
 fun Context.showDeleteEmptyNoteActionDialog(
     onDeleteClickListener: ((data: String?) -> Unit),
     onKeepClickListener: (() -> Unit)

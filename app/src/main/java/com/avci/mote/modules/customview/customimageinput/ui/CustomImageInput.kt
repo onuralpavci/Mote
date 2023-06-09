@@ -64,6 +64,12 @@ class CustomImageInput @JvmOverloads constructor(
         }
     }
 
+    fun setOnDalleClickListener(callback: (() -> Unit)) {
+        binding.dalleButton.setOnClickListener {
+            callback.invoke()
+        }
+    }
+
     fun setOnCloseClickListener(callback: (() -> Unit)) {
         binding.deleteButton.setOnClickListener {
             callback.invoke()
@@ -72,7 +78,13 @@ class CustomImageInput @JvmOverloads constructor(
 
     fun loadImage(uri: Uri, onLoadFailed: (() -> Unit)? = null) {
         binding.apply {
-            context.loadImageWithCachedFirst(uri, uri, ::onResourceReady, ::onResourceReady, onLoadFailed)
+            context.loadImageWithCachedFirst(
+                uri,
+                uri,
+                ::onResourceReady,
+                ::onResourceReady,
+                onLoadFailed
+            )
         }
     }
 

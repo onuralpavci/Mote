@@ -21,6 +21,7 @@ import com.avci.mote.modules.createnote.ui.model.CreateNotePreview
 import com.avci.mote.modules.createnote.util.NoteComponentSortItemTouchHelper
 import com.avci.mote.modules.customview.customactiondialog.ui.providers.showDeleteEmptyNoteActionDialog
 import com.avci.mote.modules.customview.customactiondialog.ui.providers.showDeleteNoteActionDialog
+import com.avci.mote.modules.customview.customactiondialog.ui.providers.showEnterDallePromptDialog
 import com.avci.mote.modules.customview.customactiondialog.ui.providers.showEnterUrlActionDialog
 import com.avci.mote.modules.customview.customactiondialog.ui.providers.showNoteSavedActionDialog
 import com.avci.mote.utils.openChatGPT
@@ -85,6 +86,12 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
             // TODO: Find a better way to get update image component id
             createNoteViewModel.imageComponentIdToUpdate = componentId
             openEnterImageUrlDialog()
+        }
+
+        override fun onDalleClickListener(componentId: Int) {
+            // TODO: Find a better way to get update image component id
+            createNoteViewModel.imageComponentIdToUpdate = componentId
+            openDallePromtDialog()
         }
 
         override fun onImageLoadImageFailed(componentId: Int) {
@@ -199,6 +206,10 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
         context?.showEnterUrlActionDialog(onDoneClickListener = ::onImageUrlEntered)
     }
 
+    private fun openDallePromtDialog() {
+        context?.showEnterDallePromptDialog(onDoneClickListener = ::onDallePromptEntered)
+    }
+
     private fun deleteNote(data: String?) {
         createNoteViewModel.deleteNote()
         navBack()
@@ -207,6 +218,11 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
     private fun onImageUrlEntered(url: String?) {
         createNoteViewModel.onImageSelected(Uri.parse(url.orEmpty()))
     }
+
+    private fun onDallePromptEntered(prompt: String?) {
+        createNoteViewModel.onDallePromptEntered(prompt)
+    }
+
 
     private fun onNavigateBack() {
         createNoteViewModel.onNavigateBack()

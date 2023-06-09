@@ -74,4 +74,7 @@
     <string name="keep_empty_note">Keep Empty Note?</string>
     <string name="your_note_does">Your note doesn\'t have any content.\nWould you like to keep it anyway, or should we delete it for you?</string>
     <string name="keep">Keep</string>
+
+    <string name="create_image_with">Create image with Dall-E</string>
+    <string name="describe_the_image">Describe the image you want to create</string>
 </resources>

@@ -47,7 +47,10 @@ class CreateNoteAdapter(
         }
 
         override fun onEmptyTextDeleted(componentId: Int, adapterPosition: Int) {
-            listener.onTextAreaEmptyTextDeleted(componentId = componentId, adapterPosition = adapterPosition)
+            listener.onTextAreaEmptyTextDeleted(
+                componentId = componentId,
+                adapterPosition = adapterPosition
+            )
         }
 
         override fun onDragged(viewHolder: CreateNoteTextAreaItemViewHolder) {
@@ -61,7 +64,10 @@ class CreateNoteAdapter(
         }
 
         override fun onEmptyTextDeleted(componentId: Int, adapterPosition: Int) {
-            listener.onHeadingEmptyTextDeleted(componentId = componentId, adapterPosition = adapterPosition)
+            listener.onHeadingEmptyTextDeleted(
+                componentId = componentId,
+                adapterPosition = adapterPosition
+            )
         }
 
         override fun onDragged(viewHolder: CreateNoteHeadingItemViewHolder) {
@@ -76,6 +82,10 @@ class CreateNoteAdapter(
 
         override fun onDownloadImageButtonClicked(componentId: Int) {
             listener.onDownloadEditButtonClicked(componentId)
+        }
+
+        override fun onDalleClickListener(componentId: Int) {
+            listener.onDalleClickListener(componentId)
         }
 
         override fun onLoadImageFailed(componentId: Int) {
@@ -95,17 +105,52 @@ class CreateNoteAdapter(
         return getItem(position).itemType.ordinal
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<BaseCreateNoteListItem> {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BaseViewHolder<BaseCreateNoteListItem> {
         return when (viewType) {
-            TITLE.ordinal -> CreateNoteTitleItemViewHolder.create(parent, createNoteTitleItemListener)
+            TITLE.ordinal -> CreateNoteTitleItemViewHolder.create(
+                parent,
+                createNoteTitleItemListener
+            )
+
             LABEL.ordinal -> CreateNoteLabelItemViewHolder.create(parent)
-            ADD_TEXT_AREA_ACTION.ordinal -> CreateNoteActionItemViewHolder.create(parent, createNoteActionItemListener)
-            ADD_HEADING_ACTION.ordinal -> CreateNoteActionItemViewHolder.create(parent, createNoteActionItemListener)
-            ADD_IMAGE_ACTION.ordinal -> CreateNoteActionItemViewHolder.create(parent, createNoteActionItemListener)
-            ASK_CHATGPT_ACTION.ordinal -> CreateNoteActionItemViewHolder.create(parent, createNoteActionItemListener)
-            TEXT_AREA.ordinal -> CreateNoteTextAreaItemViewHolder.create(parent, createNoteTextAreaItemListener)
-            HEADING.ordinal -> CreateNoteHeadingItemViewHolder.create(parent, createNoteHeadingItemListener)
-            IMAGE.ordinal -> CreateNoteImageItemViewHolder.create(parent, createNoteItemItemListener)
+            ADD_TEXT_AREA_ACTION.ordinal -> CreateNoteActionItemViewHolder.create(
+                parent,
+                createNoteActionItemListener
+            )
+
+            ADD_HEADING_ACTION.ordinal -> CreateNoteActionItemViewHolder.create(
+                parent,
+                createNoteActionItemListener
+            )
+
+            ADD_IMAGE_ACTION.ordinal -> CreateNoteActionItemViewHolder.create(
+                parent,
+                createNoteActionItemListener
+            )
+
+            ASK_CHATGPT_ACTION.ordinal -> CreateNoteActionItemViewHolder.create(
+                parent,
+                createNoteActionItemListener
+            )
+
+            TEXT_AREA.ordinal -> CreateNoteTextAreaItemViewHolder.create(
+                parent,
+                createNoteTextAreaItemListener
+            )
+
+            HEADING.ordinal -> CreateNoteHeadingItemViewHolder.create(
+                parent,
+                createNoteHeadingItemListener
+            )
+
+            IMAGE.ordinal -> CreateNoteImageItemViewHolder.create(
+                parent,
+                createNoteItemItemListener
+            )
+
             DIVIDER.ordinal -> CreateNoteDividerItemViewHolder.create(parent)
             else -> throw Exception("$logTag: Item View Type is Unknown.")
         }
@@ -124,6 +169,7 @@ class CreateNoteAdapter(
         fun onHeadingEmptyTextDeleted(componentId: Int, adapterPosition: Int)
         fun onImageEditButtonClicked(componentId: Int)
         fun onDownloadEditButtonClicked(componentId: Int)
+        fun onDalleClickListener(componentId: Int)
         fun onImageLoadImageFailed(componentId: Int)
         fun onImageDeleteButtonClicked(componentId: Int)
         fun onSortableItemPressed(viewHolder: BaseViewHolder<BaseCreateNoteListItem>)
