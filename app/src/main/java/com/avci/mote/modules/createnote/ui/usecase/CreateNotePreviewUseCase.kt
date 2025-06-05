@@ -99,6 +99,7 @@ class CreateNotePreviewUseCase @Inject constructor(
             is AddTextAreaActionItem -> addNewTextAreaComponent(noteId)
             is AddHeadingActionItem -> addNewHeadingComponent(noteId)
             is AddImageActionItem -> addImageComponent(noteId)
+            else -> {}
         }
     }
 
