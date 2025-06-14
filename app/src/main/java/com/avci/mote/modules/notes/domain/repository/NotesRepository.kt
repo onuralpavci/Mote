@@ -14,8 +14,6 @@ interface NotesRepository {
 
     suspend fun getNoteDTOFlow(noteId: Int): Flow<NoteDTO?>
 
-    suspend fun getNoteComponentsDTO(noteId: Int): List<BaseNoteComponentDTO>
-
     suspend fun getNoteComponentsDTOFlow(noteId: Int): Flow<List<BaseNoteComponentDTO>>
 
     suspend fun insertNote(createTimeStamp: Long): Int

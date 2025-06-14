@@ -1,11 +1,16 @@
 package com.avci.mote.modules.createnote.data.di
 
+import com.avci.mote.database.dao.NoteHeadingDao
 import com.avci.mote.database.dao.NoteImageDao
 import com.avci.mote.database.dao.NoteTextAreaDao
+import com.avci.mote.modules.createnote.data.mapper.NoteHeadingComponentDTOMapper
 import com.avci.mote.modules.createnote.data.mapper.NoteImageComponentDTOMapper
 import com.avci.mote.modules.createnote.data.mapper.NoteTextAreaComponentDTOMapper
+import com.avci.mote.modules.createnote.data.repository.NoteHeadingComponentRepositoryImpl
 import com.avci.mote.modules.createnote.data.repository.NoteImageComponentRepositoryImpl
 import com.avci.mote.modules.createnote.data.repository.NoteTextAreaComponentRepositoryImpl
+import com.avci.mote.modules.createnote.domain.repository.NoteHeadingComponentRepository
+import com.avci.mote.modules.createnote.domain.repository.NoteHeadingComponentRepository.Companion.NOTE_HEADING_COMPONENT_REPOSITORY_INJECTION_NAME
 import com.avci.mote.modules.createnote.domain.repository.NoteImageComponentRepository
 import com.avci.mote.modules.createnote.domain.repository.NoteImageComponentRepository.Companion.NOTE_IMAGE_COMPONENT_REPOSITORY_INJECTION_NAME
 import com.avci.mote.modules.createnote.domain.repository.NoteTextAreaComponentRepository
@@ -40,6 +45,18 @@ object CreateNoteNetworkModule {
         return NoteTextAreaComponentRepositoryImpl(
             noteTextAreaDao = textAreaDao,
             noteTextAreaComponentDTOMapper = noteTextAreaComponentDTOMapper
+        )
+    }
+
+    @Provides
+    @Named(NOTE_HEADING_COMPONENT_REPOSITORY_INJECTION_NAME)
+    fun provideNoteHeadingComponentRepository(
+        noteHeadingDao: NoteHeadingDao,
+        noteHeadingComponentDTOMapper: NoteHeadingComponentDTOMapper
+    ): NoteHeadingComponentRepository {
+        return NoteHeadingComponentRepositoryImpl(
+            noteHeadingDao = noteHeadingDao,
+            noteHeadingComponentDTOMapper = noteHeadingComponentDTOMapper
         )
     }
 }

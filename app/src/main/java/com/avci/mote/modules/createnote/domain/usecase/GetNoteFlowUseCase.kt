@@ -21,7 +21,7 @@ class GetNoteFlowUseCase @Inject constructor(
             if (note == null) {
                 null
             } else {
-                noteMapper.mapTo(note, noteComponents)
+                noteMapper.mapTo(note, noteComponents.sortedBy { it.order })
             }
         }
     }

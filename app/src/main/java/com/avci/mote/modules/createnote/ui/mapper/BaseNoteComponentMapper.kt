@@ -10,15 +10,19 @@ class BaseNoteComponentMapper @Inject constructor() {
             is BaseNoteComponent.TextAreaComponent -> {
                 BaseCreateNoteListItem.BaseNoteComponentItem.TextAreaItem(
                     text = baseNoteComponent.text.orEmpty(),
-                    componentId = baseNoteComponent.id,
-                    order = baseNoteComponent.order
+                    componentId = baseNoteComponent.id
                 )
             }
             is BaseNoteComponent.ImageComponent -> {
                 BaseCreateNoteListItem.BaseNoteComponentItem.ImageItem(
                     uri = baseNoteComponent.uri.orEmpty(),
-                    componentId = baseNoteComponent.id,
-                    order = baseNoteComponent.order
+                    componentId = baseNoteComponent.id
+                )
+            }
+            is BaseNoteComponent.HeadingComponent -> {
+                BaseCreateNoteListItem.BaseNoteComponentItem.HeadingItem(
+                    text = baseNoteComponent.text.orEmpty(),
+                    componentId = baseNoteComponent.id
                 )
             }
         }

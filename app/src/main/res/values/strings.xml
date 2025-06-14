@@ -13,11 +13,12 @@
 
     <string name="title_here">Title Here</string>
     <string name="write_your_notes">Write your notes here…</string>
+    <string name="heading_here">Heading Here…</string>
 
     <string name="add_free_text">Add Free Text Area</string>
+    <string name="add_heading">Add Heading</string>
     <string name="add_checklist">Add Checklist</string>
     <string name="add_image">Add Image</string>
-    <string name="add_heading">Add Heading</string>
     <string name="ask_chatgpt">Ask ChatGPT</string>
 
     <string name="actions">Actions</string>
@@ -69,4 +70,8 @@
     <string name="done">Done</string>
     <string name="image_url">Image URL</string>
     <string name="save_url_requires">Save URL requires internet. Placeholder shown when offline.</string>
+
+    <string name="keep_empty_note">Keep Empty Note?</string>
+    <string name="your_note_does">Your note doesn\'t have any content.\nWould you like to keep it anyway, or should we delete it for you?</string>
+    <string name="keep">Keep</string>
 </resources>

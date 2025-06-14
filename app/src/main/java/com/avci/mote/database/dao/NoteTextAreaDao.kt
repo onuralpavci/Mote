@@ -39,4 +39,7 @@ interface NoteTextAreaDao {
 
     @Query("UPDATE note_text_area_entity SET text = :newText WHERE id = :componentId")
     suspend fun updateTextAreaText(componentId: Int, newText: String?)
+
+    @Query("UPDATE note_text_area_entity SET `order` = :newOrder WHERE id = :componentId")
+    suspend fun updateTextAreaOrder(componentId: Int, newOrder: Int)
 }

@@ -12,6 +12,13 @@ sealed class BaseNoteComponentDTO {
         val text: String?,
     ) : BaseNoteComponentDTO()
 
+    data class HeadingComponentDTO(
+        override val id: Int,
+        override val order: Int,
+        override val noteId: Int,
+        val text: String?,
+    ) : BaseNoteComponentDTO()
+
     data class ImageComponentDTO(
         override val id: Int,
         override val order: Int,

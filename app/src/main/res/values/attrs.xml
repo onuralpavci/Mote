@@ -12,6 +12,7 @@
         <attr name="textAreaText" format="string" />
         <attr name="textAreaSingleLine" format="boolean" />
         <attr name="textAreaMaxCharacter" format="integer" />
+        <attr name="textAreaTextAppearance" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="CustomSearchBarInputLayout">

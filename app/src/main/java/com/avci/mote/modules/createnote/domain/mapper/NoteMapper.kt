@@ -22,6 +22,7 @@ class NoteMapper @Inject constructor(
         val noteComponents = noteComponentDTOList.map { componentDTO ->
             when (componentDTO) {
                 is BaseNoteComponentDTO.TextAreaComponentDTO -> noteComponentMapper.mapTo(componentDTO)
+                is BaseNoteComponentDTO.HeadingComponentDTO -> noteComponentMapper.mapTo(componentDTO)
                 is BaseNoteComponentDTO.ImageComponentDTO -> noteComponentMapper.mapTo(componentDTO)
             }
         }

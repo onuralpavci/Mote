@@ -7,6 +7,8 @@ import android.util.AttributeSet
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.avci.mote.R
 import com.avci.mote.databinding.CustomImageInputBinding
+import com.avci.mote.modules.customview.delegation.draggableitemviewdelegation.DraggableItemViewComponent
+import com.avci.mote.modules.customview.delegation.draggableitemviewdelegation.DraggableItemViewDelegate
 import com.avci.mote.utils.hide
 import com.avci.mote.utils.loadImageWithCachedFirst
 import com.avci.mote.utils.setImageResAndVisibility
@@ -17,7 +19,8 @@ import kotlin.properties.Delegates
 class CustomImageInput @JvmOverloads constructor(
     context: Context,
     private val attrs: AttributeSet? = null
-) : MotionLayout(context, attrs) {
+) : MotionLayout(context, attrs),
+    DraggableItemViewComponent by DraggableItemViewDelegate() {
 
     private var isEditOptionsOpen by Delegates.observable(false) { _, _, newValue ->
         if (newValue) {
@@ -46,6 +49,7 @@ class CustomImageInput @JvmOverloads constructor(
         binding.editButton.setOnClickListener {
             isEditOptionsOpen = isEditOptionsOpen.not()
         }
+        initDraggableItemViewComponent(binding.dragButton)
     }
 
     fun setOnSelectImageButtonClickListener(callback: (() -> Unit)) {

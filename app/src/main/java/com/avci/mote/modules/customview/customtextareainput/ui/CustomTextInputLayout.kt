@@ -9,18 +9,24 @@ import androidx.core.content.res.use
 import androidx.core.widget.addTextChangedListener
 import com.avci.mote.R
 import com.avci.mote.databinding.CustomTextAreaInputLayoutBinding
+import com.avci.mote.modules.customview.delegation.draggableitemviewdelegation.DraggableItemViewComponent
+import com.avci.mote.modules.customview.delegation.draggableitemviewdelegation.DraggableItemViewDelegate
 import com.avci.mote.utils.viewbinding.viewBinding
 import kotlin.properties.Delegates
 
-// TODO: Create a base class for CustomInputLayouts
-class CustomTextAreaInputLayout @JvmOverloads constructor(
+class CustomTextInputLayout @JvmOverloads constructor(
     context: Context,
     private val attrs: AttributeSet? = null
-) : ConstraintLayout(context, attrs) {
+) : ConstraintLayout(context, attrs),
+    DraggableItemViewComponent by DraggableItemViewDelegate() {
 
     private val binding = viewBinding(CustomTextAreaInputLayoutBinding::inflate)
 
     private val editText get() = binding.textInputEditText
+
+    init {
+        initDraggableItemViewComponent(binding.dragButton)
+    }
 
     var text: String
         get() = editText.text.toString()
@@ -39,6 +45,10 @@ class CustomTextAreaInputLayout @JvmOverloads constructor(
 
     private var isSingleLine by Delegates.observable(false) { _, _, newValue ->
         editText.isSingleLine = newValue
+    }
+
+    private var textAppearance by Delegates.observable(-1) { _, _, newValue ->
+        editText.setTextAppearance(newValue)
     }
 
     private var maxCharacter by Delegates.observable(-1) { _, _, newValue ->
@@ -61,6 +71,7 @@ class CustomTextAreaInputLayout @JvmOverloads constructor(
             hint = attrs.getString(R.styleable.CustomTextAreaInputLayout_textAreaHint).orEmpty()
             isSingleLine = attrs.getBoolean(R.styleable.CustomTextAreaInputLayout_textAreaSingleLine, false)
             maxCharacter = attrs.getInteger(R.styleable.CustomTextAreaInputLayout_textAreaMaxCharacter, -1)
+            textAppearance = attrs.getResourceId(R.styleable.CustomTextAreaInputLayout_textAreaTextAppearance, -1)
         }
     }
 

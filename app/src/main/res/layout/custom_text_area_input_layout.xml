@@ -11,7 +11,7 @@
         style="@style/TextInputLayout.TextArea"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/dragButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -25,5 +25,14 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/dragButton"
+        style="@style/Button.Transparent"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:icon="@drawable/ic_drag"
+        app:iconTint="@color/base_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </merge>

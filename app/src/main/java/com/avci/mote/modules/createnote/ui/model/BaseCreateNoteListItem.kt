@@ -13,9 +13,11 @@ sealed class BaseCreateNoteListItem : RecyclerListItem {
         TITLE,
         LABEL,
         ADD_TEXT_AREA_ACTION,
+        ADD_HEADING_ACTION,
         ADD_IMAGE_ACTION,
         ASK_CHATGPT_ACTION,
         TEXT_AREA,
+        HEADING,
         IMAGE,
         DIVIDER
     }
@@ -79,6 +81,28 @@ sealed class BaseCreateNoteListItem : RecyclerListItem {
             }
         }
 
+        object AddHeadingActionItem : BaseActionItem() {
+
+            override val itemType: ItemType
+                get() = ItemType.ADD_HEADING_ACTION
+
+            @DrawableRes
+            override val actionIconResId: Int = R.drawable.ic_heading
+
+            @StringRes
+            override val textResId: Int = R.string.add_heading
+
+            override fun areItemsTheSame(other: RecyclerListItem): Boolean {
+                return other is AddHeadingActionItem &&
+                    actionIconResId == other.actionIconResId &&
+                    textResId == other.textResId
+            }
+
+            override fun areContentsTheSame(other: RecyclerListItem): Boolean {
+                return other is AddHeadingActionItem && other == this
+            }
+        }
+
         object AddImageActionItem : BaseActionItem() {
 
             override val itemType: ItemType
@@ -126,12 +150,10 @@ sealed class BaseCreateNoteListItem : RecyclerListItem {
 
     sealed class BaseNoteComponentItem : BaseCreateNoteListItem() {
         abstract val componentId: Int
-        abstract val order: Int
 
         data class TextAreaItem(
             var text: String,
-            override val componentId: Int,
-            override val order: Int
+            override val componentId: Int
         ) : BaseNoteComponentItem() {
 
             override val itemType: ItemType
@@ -142,14 +164,30 @@ sealed class BaseCreateNoteListItem : RecyclerListItem {
             }
 
             override fun areContentsTheSame(other: RecyclerListItem): Boolean {
-                return other is TextAreaItem && other == this
+                return other is TextAreaItem && other.text == this.text
+            }
+        }
+
+        data class HeadingItem(
+            var text: String,
+            override val componentId: Int
+        ) : BaseNoteComponentItem() {
+
+            override val itemType: ItemType
+                get() = ItemType.HEADING
+
+            override fun areItemsTheSame(other: RecyclerListItem): Boolean {
+                return other is HeadingItem && this.componentId == other.componentId
+            }
+
+            override fun areContentsTheSame(other: RecyclerListItem): Boolean {
+                return other is HeadingItem && other.text == this.text
             }
         }
 
         data class ImageItem(
             val uri: String,
-            override val componentId: Int,
-            override val order: Int
+            override val componentId: Int
         ) : BaseNoteComponentItem() {
 
             override val itemType: ItemType
@@ -160,7 +198,7 @@ sealed class BaseCreateNoteListItem : RecyclerListItem {
             }
 
             override fun areContentsTheSame(other: RecyclerListItem): Boolean {
-                return other is ImageItem && other == this
+                return other is ImageItem && other.uri == this.uri
             }
         }
     }

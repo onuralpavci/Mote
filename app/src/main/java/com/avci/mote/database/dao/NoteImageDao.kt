@@ -39,4 +39,7 @@ interface NoteImageDao {
 
     @Query("UPDATE note_image_entity SET uri = :newUri WHERE id = :componentId")
     suspend fun updateNoteImageUri(componentId: Int, newUri: String?)
+
+    @Query("UPDATE note_image_entity SET `order` = :newOrder WHERE id = :componentId")
+    suspend fun updateNoteImageOrder(componentId: Int, newOrder: Int)
 }

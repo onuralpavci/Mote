@@ -10,6 +10,7 @@ interface NoteImageComponentRepository {
 
     suspend fun getImageHighestOrder(noteId: Int): Int?
 
+    suspend fun updateNoteImageOrder(componentId: Int, newOrder: Int)
 
     companion object {
         const val NOTE_IMAGE_COMPONENT_REPOSITORY_INJECTION_NAME = "noteImageComponentRepositoryInjectionName"
