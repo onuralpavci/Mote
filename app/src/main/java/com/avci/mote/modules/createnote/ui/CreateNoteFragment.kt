@@ -5,16 +5,21 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.avci.mote.R
 import com.avci.mote.databinding.FragmentCreateNoteBinding
 import com.avci.mote.modules.core.ui.BaseFragment
 import com.avci.mote.modules.core.ui.model.FragmentConfiguration
 import com.avci.mote.modules.core.ui.model.ToolbarConfiguration
+import com.avci.mote.modules.core.ui.viewholder.BaseViewHolder
 import com.avci.mote.modules.createnote.ui.adapter.CreateNoteAdapter
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem
 import com.avci.mote.modules.createnote.ui.model.CreateNotePreview
+import com.avci.mote.modules.createnote.util.NoteComponentSortItemTouchHelper
+import com.avci.mote.modules.customview.customactiondialog.ui.providers.showDeleteEmptyNoteActionDialog
 import com.avci.mote.modules.customview.customactiondialog.ui.providers.showDeleteNoteActionDialog
 import com.avci.mote.modules.customview.customactiondialog.ui.providers.showEnterUrlActionDialog
 import com.avci.mote.modules.customview.customactiondialog.ui.providers.showNoteSavedActionDialog
@@ -28,7 +33,7 @@ import kotlinx.coroutines.launch
 class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
 
     private val toolbarConfiguration = ToolbarConfiguration(
-        onBackButtonClicked = ::navBack
+        onBackButtonClicked = ::onNavigateBack
     )
     override val fragmentConfiguration = FragmentConfiguration(
         isBottomNavigationViewVisible = false,
@@ -52,8 +57,22 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
             createNoteViewModel.onTextAreaInputChanged(text = text, componentId = componentId)
         }
 
-        override fun onTextAreaEmptyTextDeleted(componentId: Int) {
+        override fun onTextAreaEmptyTextDeleted(componentId: Int, adapterPosition: Int) {
+            val previousItemPosition = adapterPosition - 1
+            binding.createNoteRecyclerView.findViewHolderForAdapterPosition(previousItemPosition)
+                ?.itemView?.requestFocus()
             createNoteViewModel.onTextAreaEmptyTextDeleted(componentId)
+        }
+
+        override fun onHeadingTextChanged(text: String, componentId: Int) {
+            createNoteViewModel.onHeadingInputChanged(text = text, componentId = componentId)
+        }
+
+        override fun onHeadingEmptyTextDeleted(componentId: Int, adapterPosition: Int) {
+            val previousItemPosition = adapterPosition - 1
+            binding.createNoteRecyclerView.findViewHolderForAdapterPosition(previousItemPosition)
+                ?.itemView?.requestFocus()
+            createNoteViewModel.onHeadingEmptyTextDeleted(componentId)
         }
 
         override fun onImageEditButtonClicked(componentId: Int) {
@@ -75,9 +94,33 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
         override fun onImageDeleteButtonClicked(componentId: Int) {
             createNoteViewModel.onImageDeleteClicked(componentId)
         }
+
+        override fun onSortableItemPressed(viewHolder: BaseViewHolder<BaseCreateNoteListItem>) {
+            dragDropItemTouchHelper.startDrag(viewHolder)
+        }
     }
 
     private val createNoteAdapter = CreateNoteAdapter(createNoteAdapterListener)
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            onNavigateBack()
+        }
+    }
+
+    private val onItemMoveListener = object : NoteComponentSortItemTouchHelper.ItemMoveListener {
+        override fun onItemMove(fromPosition: Int, toPosition: Int) {
+            createNoteViewModel.onNoteComponentItemMoved(fromPosition, toPosition)
+        }
+
+        override fun onItemReleased() {
+            createNoteViewModel.updateNoteComponentOrders()
+        }
+    }
+
+    private val sortItemTouchHelper = NoteComponentSortItemTouchHelper(onItemMoveListener)
+
+    private val dragDropItemTouchHelper = ItemTouchHelper(sortItemTouchHelper)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -85,9 +128,22 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
         initObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        onBackPressedCallback.isEnabled = true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        onBackPressedCallback.isEnabled = false
+    }
+
     private fun initUi() {
         with(binding) {
-            createNoteRecyclerView.adapter = createNoteAdapter
+            createNoteRecyclerView.apply {
+                adapter = createNoteAdapter
+                dragDropItemTouchHelper.attachToRecyclerView(this)
+            }
             taskbar.apply {
                 setOnDeleteButtonClickListener {
                     context?.showDeleteNoteActionDialog(onDeleteClickListener = ::deleteNote)
@@ -96,6 +152,7 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
                     createNoteViewModel.updateIsnNoteSaved()
                 }
             }
+            activity?.onBackPressedDispatcher?.addCallback(onBackPressedCallback)
         }
     }
 
@@ -114,9 +171,21 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
                 setContent(preview.updateDate ?: preview.createDate)
                 setBookMarkChecked(preview.isSaved)
             }
-            openChatGPTEvent?.consume()?.let { context?.openChatGPT() }
-            navBackEvent?.consume()?.let { navBack() }
-            showSaveSuccessDialogEvent?.consume()?.let { context?.showNoteSavedActionDialog() }
+            openChatGPTEvent?.consume()?.let {
+                context?.openChatGPT()
+            }
+            navBackEvent?.consume()?.let {
+                navBack()
+            }
+            showSaveSuccessDialogEvent?.consume()?.let {
+                context?.showNoteSavedActionDialog()
+            }
+            showDeleteEmptyNoteActionDialogEvent?.consume()?.let {
+                context?.showDeleteEmptyNoteActionDialog(
+                    onDeleteClickListener = ::deleteNote,
+                    onKeepClickListener = ::navBack
+                )
+            }
         }
     }
 
@@ -137,6 +206,10 @@ class CreateNoteFragment : BaseFragment(R.layout.fragment_create_note) {
 
     private fun onImageUrlEntered(url: String?) {
         createNoteViewModel.onImageSelected(Uri.parse(url.orEmpty()))
+    }
+
+    private fun onNavigateBack() {
+        createNoteViewModel.onNavigateBack()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

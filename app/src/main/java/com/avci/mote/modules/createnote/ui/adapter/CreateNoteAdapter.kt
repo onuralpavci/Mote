@@ -5,10 +5,12 @@ import androidx.recyclerview.widget.ListAdapter
 import com.avci.mote.modules.core.ui.viewholder.BaseDiffUtil
 import com.avci.mote.modules.core.ui.viewholder.BaseViewHolder
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem
+import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.ItemType.ADD_HEADING_ACTION
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.ItemType.ADD_IMAGE_ACTION
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.ItemType.ADD_TEXT_AREA_ACTION
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.ItemType.ASK_CHATGPT_ACTION
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.ItemType.DIVIDER
+import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.ItemType.HEADING
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.ItemType.IMAGE
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.ItemType.LABEL
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.ItemType.TEXT_AREA
@@ -16,6 +18,8 @@ import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem.ItemType
 import com.avci.mote.modules.createnote.ui.viewholder.CreateNoteActionItemViewHolder
 import com.avci.mote.modules.createnote.ui.viewholder.CreateNoteActionItemViewHolder.CreateNoteActionItemListener
 import com.avci.mote.modules.createnote.ui.viewholder.CreateNoteDividerItemViewHolder
+import com.avci.mote.modules.createnote.ui.viewholder.CreateNoteHeadingItemViewHolder
+import com.avci.mote.modules.createnote.ui.viewholder.CreateNoteHeadingItemViewHolder.CreateNoteHeadingItemListener
 import com.avci.mote.modules.createnote.ui.viewholder.CreateNoteImageItemViewHolder
 import com.avci.mote.modules.createnote.ui.viewholder.CreateNoteImageItemViewHolder.CreateNoteImageItemListener
 import com.avci.mote.modules.createnote.ui.viewholder.CreateNoteLabelItemViewHolder
@@ -42,10 +46,27 @@ class CreateNoteAdapter(
             listener.onTextAreaTextChanged(text = text, componentId = componentId)
         }
 
-        override fun onEmptyTextDeleted(componentId: Int) {
-            listener.onTextAreaEmptyTextDeleted(componentId)
+        override fun onEmptyTextDeleted(componentId: Int, adapterPosition: Int) {
+            listener.onTextAreaEmptyTextDeleted(componentId = componentId, adapterPosition = adapterPosition)
         }
 
+        override fun onDragged(viewHolder: CreateNoteTextAreaItemViewHolder) {
+            listener.onSortableItemPressed(viewHolder)
+        }
+    }
+
+    private val createNoteHeadingItemListener = object : CreateNoteHeadingItemListener {
+        override fun onTextChanged(text: String, componentId: Int) {
+            listener.onHeadingTextChanged(text = text, componentId = componentId)
+        }
+
+        override fun onEmptyTextDeleted(componentId: Int, adapterPosition: Int) {
+            listener.onHeadingEmptyTextDeleted(componentId = componentId, adapterPosition = adapterPosition)
+        }
+
+        override fun onDragged(viewHolder: CreateNoteHeadingItemViewHolder) {
+            listener.onSortableItemPressed(viewHolder)
+        }
     }
 
     private val createNoteItemItemListener = object : CreateNoteImageItemListener {
@@ -65,6 +86,9 @@ class CreateNoteAdapter(
             listener.onImageDeleteButtonClicked(componentId)
         }
 
+        override fun onDragged(viewHolder: CreateNoteImageItemViewHolder) {
+            listener.onSortableItemPressed(viewHolder)
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -76,9 +100,11 @@ class CreateNoteAdapter(
             TITLE.ordinal -> CreateNoteTitleItemViewHolder.create(parent, createNoteTitleItemListener)
             LABEL.ordinal -> CreateNoteLabelItemViewHolder.create(parent)
             ADD_TEXT_AREA_ACTION.ordinal -> CreateNoteActionItemViewHolder.create(parent, createNoteActionItemListener)
+            ADD_HEADING_ACTION.ordinal -> CreateNoteActionItemViewHolder.create(parent, createNoteActionItemListener)
             ADD_IMAGE_ACTION.ordinal -> CreateNoteActionItemViewHolder.create(parent, createNoteActionItemListener)
             ASK_CHATGPT_ACTION.ordinal -> CreateNoteActionItemViewHolder.create(parent, createNoteActionItemListener)
             TEXT_AREA.ordinal -> CreateNoteTextAreaItemViewHolder.create(parent, createNoteTextAreaItemListener)
+            HEADING.ordinal -> CreateNoteHeadingItemViewHolder.create(parent, createNoteHeadingItemListener)
             IMAGE.ordinal -> CreateNoteImageItemViewHolder.create(parent, createNoteItemItemListener)
             DIVIDER.ordinal -> CreateNoteDividerItemViewHolder.create(parent)
             else -> throw Exception("$logTag: Item View Type is Unknown.")
@@ -93,11 +119,14 @@ class CreateNoteAdapter(
         fun onTitleChanged(title: String)
         fun onActionItemClicked(item: BaseCreateNoteListItem.BaseActionItem)
         fun onTextAreaTextChanged(text: String, componentId: Int)
-        fun onTextAreaEmptyTextDeleted(componentId: Int)
+        fun onTextAreaEmptyTextDeleted(componentId: Int, adapterPosition: Int)
+        fun onHeadingTextChanged(text: String, componentId: Int)
+        fun onHeadingEmptyTextDeleted(componentId: Int, adapterPosition: Int)
         fun onImageEditButtonClicked(componentId: Int)
         fun onDownloadEditButtonClicked(componentId: Int)
         fun onImageLoadImageFailed(componentId: Int)
         fun onImageDeleteButtonClicked(componentId: Int)
+        fun onSortableItemPressed(viewHolder: BaseViewHolder<BaseCreateNoteListItem>)
     }
 
     companion object {

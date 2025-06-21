@@ -59,3 +59,23 @@ fun Context.showEnterUrlActionDialog(
         show()
     }
 }
+
+fun Context.showDeleteEmptyNoteActionDialog(
+    onDeleteClickListener: ((data: String?) -> Unit),
+    onKeepClickListener: (() -> Unit)
+) {
+    CustomActionDialog.create(this).apply {
+        applyParams(
+            ActionDialogParams(
+                startImageRes = R.drawable.ic_red_trash,
+                titleRes = R.string.keep_empty_note,
+                descriptionRes = R.string.your_note_does,
+                primaryButtonTextRes = R.string.delete,
+                secondaryButtonTextRes = R.string.keep,
+                primaryButtonClickListener = onDeleteClickListener,
+                secondaryButtonClickListener = onKeepClickListener
+            )
+        )
+        show()
+    }
+}

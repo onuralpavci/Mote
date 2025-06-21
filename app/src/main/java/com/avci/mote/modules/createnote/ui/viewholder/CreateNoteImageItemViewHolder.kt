@@ -6,11 +6,15 @@ import android.view.ViewGroup
 import com.avci.mote.databinding.ItemCreateNoteImageBinding
 import com.avci.mote.modules.core.ui.viewholder.BaseViewHolder
 import com.avci.mote.modules.createnote.ui.model.BaseCreateNoteListItem
+import com.avci.mote.modules.customview.customimageinput.ui.CustomImageInput
+import com.avci.mote.modules.customview.delegation.draggableitemviewholderdelegation.DraggableItemViewHolderComponent
+import com.avci.mote.modules.customview.delegation.draggableitemviewholderdelegation.DraggableItemViewHolderDelegate
 
 class CreateNoteImageItemViewHolder(
     private val binding: ItemCreateNoteImageBinding,
     private val listener: CreateNoteImageItemListener
-) : BaseViewHolder<BaseCreateNoteListItem>(binding.root) {
+) : BaseViewHolder<BaseCreateNoteListItem>(binding.root),
+    DraggableItemViewHolderComponent<CustomImageInput> by DraggableItemViewHolderDelegate() {
 
     override fun bind(item: BaseCreateNoteListItem) {
         if (item !is BaseCreateNoteListItem.BaseNoteComponentItem.ImageItem) return
@@ -21,17 +25,21 @@ class CreateNoteImageItemViewHolder(
             setOnDownloadImageButtonClickListener {
                 listener.onDownloadImageButtonClicked(item.componentId)
             }
-        }
-        if (item.uri.isBlank()) {
-            binding.customImageLayout.removeImage()
-        } else {
-            binding.customImageLayout.loadImage(
-                uri = Uri.parse(item.uri),
-                onLoadFailed = { listener.onLoadImageFailed(item.componentId) }
+            if (item.uri.isBlank()) {
+                removeImage()
+            } else {
+                loadImage(
+                    uri = Uri.parse(item.uri),
+                    onLoadFailed = { listener.onLoadImageFailed(item.componentId) }
+                )
+            }
+            setOnCloseClickListener {
+                listener.onDeleteButtonClicked(item.componentId)
+            }
+            initDraggableItemViewHolderComponent(
+                dragItemView = binding.customImageLayout,
+                onDragged = { listener.onDragged(this@CreateNoteImageItemViewHolder) }
             )
-        }
-        binding.customImageLayout.setOnCloseClickListener {
-            listener.onDeleteButtonClicked(item.componentId)
         }
     }
 
@@ -47,5 +55,6 @@ class CreateNoteImageItemViewHolder(
         fun onDownloadImageButtonClicked(componentId: Int)
         fun onLoadImageFailed(componentId: Int)
         fun onDeleteButtonClicked(componentId: Int)
+        fun onDragged(viewHolder: CreateNoteImageItemViewHolder)
     }
 }

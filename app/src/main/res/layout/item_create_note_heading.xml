@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.avci.mote.modules.customview.customtextareainput.ui.CustomTextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/customHeadingInputLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/spacing_normal"
+    app:textAreaHint="@string/heading_here"
+    app:textAreaTextAppearance="@style/TextAppearance.Base.Inter.Bold" />

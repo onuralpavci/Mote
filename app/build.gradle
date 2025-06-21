@@ -1,6 +1,6 @@
 plugins {
     id 'com.android.application'
-    id 'kotlin-android'
+    id 'org.jetbrains.kotlin.android'
     id "androidx.navigation.safeargs.kotlin"
     id "kotlin-kapt"
     id "dagger.hilt.android.plugin"
@@ -8,13 +8,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
+    namespace "com.avci.mote"
+    compileSdkVersion 35
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.avci.mote"
+        applicationId "com.avci.motenotes"
         minSdkVersion 24
-        targetSdkVersion 33
+        targetSdkVersion 35
         versionCode 1
         versionName "1.0"
 
@@ -34,11 +35,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '21'
     }
 
     sourceSets {
@@ -101,4 +102,7 @@ dependencies {
 
     // Browser
     implementation "androidx.browser:browser:${libVersions.browser}"
+
+    // Recyclerview
+    implementation "androidx.recyclerview:recyclerview:${libVersions.recyclerview}"
 }
