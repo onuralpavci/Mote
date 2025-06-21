@@ -13,7 +13,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.avci.mote"
+        applicationId "com.avci.motenotes"
         minSdkVersion 24
         targetSdkVersion 35
         versionCode 1
